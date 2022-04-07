@@ -1,0 +1,70 @@
+* Badteroids: Documento de Diseño
+** Conceptos
+*** Introducción
+Badteroids es un juego competitivo en 2D para Linux. Tras un enfrentamiento entre dos naciones de Andrómeda, la Federación Galáctica y la Ciudadela, la segunda se propone destruir la galaxia, y la primera deberá de impedirlo, cada una en un aeronave de su Estado, lado a lado.
+*** /Background/
+Badteroids se propone como el juego a desarrollar para la asignatura Programación Lúdica de la carrera de Ingeniería Informática de la UGR. Por la imposibilidad de dedicarle mucho tiempo, se intentarán mantener unos objetivos lo más modestos posibles pero llevándolos bien a cabo.
+*** Descripción
+El punto del juego es competir localmente. Por esto, la idea más importante, y la que se tendrá en mente para cada decisión, será que un videojuego de este tipo es más divertido cuando las acciones de un jugador repercuten sobre el otro, en lugar de considerar un sistema de puntuación aislado. Será, además, crítico evitar la monotonía interna (durante las partidas), así como la externa (de partida en partida).
+*** Características clave
+- *PVP*: los jugadores combaten el uno contra el otro con tal de frenar su progreso o debilitarlos.
+- *PVE*: los jugadores se abastecen de los recursos necesarios para avanzar y se defienden de ataques de un entorno inhóspito.
+- *Niveles* generados proceduralmente para mantener cada partida única.
+- *Partidas cortas* para no prolongar la tensión más tiempo del necesario.
+*** Género
+Badteroids sigue los géneros /arcade en 2D/, /casual/, /retro/, y /acción/. Además, con respecto al gameplay, es /multijugador local/ de /pantalla dividida/.
+*** Plataforma
+La plataforma objetivo es GNU/Linux. Existirá la posibilidad de fabricar binarios independientes de la arquitectura solo si no se requiere complicar el código para ello, pero GNU/Linux es la plataforma principal.
+*** Arte conceptual
+[[./imgs/main_idea.png]]
+** Gameplay y mecánicas
+*** Núcleo del gameplay
+La idea detrás del gameplay es modesta: en pantalla dividida, los jugadores avanzan e intentan evitar el avance de su oponente.
+**** Combate
+Un jugador deberá debilitar al oponente con tal de frenar su avance. De no preocuparse por ello, el otro jugador ganará por tiempo. En caso de ambos no combatir, gana la Ciudadela.
+
+La gran mayoría del combate se llevará a cabo *de forma indirecta*, mediante el envío de amenazas, esquivables o no, al otro jugador.
+
+Una mucho menor parte se llevará a cabo de forma directa, girando una de las naves de forma que apunte a la otra, y disparando a través de la línea que separa las dos pantallas.
+**** Avance
+Con tal del avanzar, los jugadores deberán:
+
+- Esquivar los ataques del otro jugador.
+- Intentar defenderse, mediante escudos o similares, de aquellos ataques que no sean esquivables.
+- Esquivar o destruir los asteroides del entorno.
+- Repostar los recursos necesarios para mantener la nave en marcha.
+*** Flujo de la partida
+El flujo es por naturaleza lineal: ambos intentan avanzar en un camino fijo hacia el agujero negro que sostiene la galaxia. Durante el proceso, encontrarán de forma consistente:
+
+- Asteroides de distintos tamaños que deberán de esquivar o destruir.
+- Pequeños asteroides que contienen recursos, que podrán capturar y así repostar.
+
+Conforme avance la carrera y los jugadores se aproximen al centro, irá cambiando el escenario. Esto evitará mantener un gameplay idéntico. Durante las distintas fases:
+
+- Irán cambiando los colores del entorno.
+- Aparecerán amenazas diferentes. Por ejemplo, mientras se cruza el /cinturón de asteroides/ habrá más de estos de un tamaño más reducido.
+- Habrá ligeras alteraciones en el PVP. Por ejemplo, ataques que solo existen durante cierta parte de la carrera.
+
+Estos cambios durante el gameplay le dan un ligero toque de estrategia al juego. Podrá ser conveniente realizar ciertas acciones en ciertos momentos de la partida. Por ejemplo, más cerca del agujero negro algunos ataques costarán menos recursos por poder aprovecharse de la aceleración gravitatoria de este.
+*** Naciones
+**** Federación Galáctica
+La Federación Galáctica es una dictadura autárquica. Sus aeronaves, así, tienen un estilo serio, y se enfocan a ofrecer la máxima velocidad de movimiento para esquivar asteroides y espacio para armas. /Nada imprescindible a bordo/ es su principal preocupación. Por esto, tienen depósitos más pequeños para recursos, necesitan repostar más a menudo, y sus maniobras defensivas tienen poca duración.
+**** La Ciudadela
+Tras la formación de la Federación, individuos contrarios al régimen, libertarios por naturaleza, fueron marcados como /personas no gratas/. Se exiliaron y formaron /La Ciudadela/, que sigue recibiendo nuevos miembros de forma constante. Sus aeronaves tienen un estilo más /duct tape/, enfocadas en /mantenerse de una pieza/. Esto lo consiguen con mejores defensas y mayores tanques de recursos. A cambio, sacrifican impresionantes maniobras ofensivas y velocidad de movimiento.
+*** Recursos
+En su viaje, las aeronaves encuentran pequeños asteroides que son capaces de atrapar y de las cuales extraer recursos. No es un proceso instantáneo: está a criterio del jugador durante cuánto tiempo quiere mantener agarrado el objeto para la extracción. Puede decidir mantenerlo hasta rellenar su depósito (o exhaustar el asteroide), o bien soltarlo después de unos segundos con tal de cargar menos peso y volver a la velocidad de movimiento usual.
+**** Hidrógeno
+El hidrógeno hace de combustible en Badteroids. Quedarse sin él implicaría cesar de acelerar y perder así la partida. Se utiliza, además, para cargar armas y escudos en el breve instante durante el que estén disponibles.
+**** Oxígeno
+Todo ser vivo, y esto incluye los seres de Andrómeda, necesita oxígeno para mantener una atmósfera en la cual sobrevivir. No siendo esto bastante, es además necesario en pequeñas cantidades como catalizador en las combustiones de hidrógeno. Quedarse sin oxígeno conllevaría la muerte inmediata del comandante.
+*** Fases de la carrera
+(Pendiente de definir)
+** Interfaz
+(Pendiente de definir)
+** Generación de mundo
+(Pendiente de definir)
+** Mercado
+Badteroids está bajo la licencia de /izquierdos de autor/ GNU General Public License v3, y su distribución se llevará a cabo en este mismo repositorio de GitHub de forma gratuita, sin modo oficial de pagar por él.
+** Historial de cambios
+*** Versión 0.1
+Primera redacción del documento.
