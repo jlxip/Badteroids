@@ -7,9 +7,14 @@ void errorCallback(int error, const char* description) {
 }
 
 void keyCallback(GLFWwindow*, int, int, int, int);
+void framebufferSizeCallback(GLFWwindow*, int, int);
 void mainLoop();
 
 GLFWwindow* window;
+
+const size_t START_WIDTH = 640;
+const size_t START_HEIGHT = 480;
+const char winName[] = "Badteroids";
 
 int main() {
 	if(!glfwInit()) {
@@ -17,27 +22,43 @@ int main() {
 		return 1;
 	}
 
-	glfwSetErrorCallback(errorCallback);
-
+	// Create the window
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
-	// TODO: Random title as an easter egg, like Terraria
-	window = glfwCreateWindow(640, 480, "Badteroids", NULL, NULL);
+	window = glfwCreateWindow(START_WIDTH, START_HEIGHT, winName, NULL, NULL);
 	if(!window) {
 		std::cerr << "Could not create window" << std::endl;
+		glfwTerminate();
 		return 2;
 	}
 
+	// Set some callbacks
+	glfwSetErrorCallback(errorCallback);
 	glfwSetKeyCallback(window, keyCallback);
-	// TODO: glfwSetFramebufferSizeCallback
+	glfwSetFramebufferSizeCallback(window, framebufferSizeCallback);
 
+	// Actually use the window
 	glfwMakeContextCurrent(window);
-	glfwSwapInterval(1); // vsync
 
+	// Initialize GLEW
+	GLenum err = glewInit();
+	if(err != GLEW_OK) {
+		std::cerr << "Could not initialize GLEW: " <<
+			glewGetErrorString(err) << std::endl;
+		glfwTerminate();
+		return 3;
+	}
+
+	// Game initialization
+	glfwSwapInterval(1); // VSync
+	glClearColor(0.0, 0.0, 0.0, 1.0);
+
+	// Set framebuffer
 	int width, height;
 	glfwGetFramebufferSize(window, &width, &height);
-	glViewport(0, 0, width, height);
+	framebufferSizeCallback(window, width, height);
 
+	// Go!
 	while(!glfwWindowShouldClose(window))
 		mainLoop();
 

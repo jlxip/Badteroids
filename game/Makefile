@@ -8,6 +8,7 @@ INCLUDES := -Isrc
 
 CXXFLAGS_BASE := -std=c++11 -O2
 CXXFLAGS_WARN := -Wall -Wextra -Werror
+CXXFLAGS_OPTS := -fno-exceptions -fno-rtti
 
 ifdef DEBUG
 CXXFLAGS_BASE += -g
@@ -16,7 +17,7 @@ endif
 CXXFLAGS := $(INCLUDES) $(CXXFLAGS_BASE) $(CXXFLAGS_WARN)
 
 LINKER := $(CXX)
-EXTRA_LINKER := -lglfw -lGL
+EXTRA_LINKER := -lglfw -lGL -lGLU -lGLEW
 LINKER_FLAGS := $(CXXFLAGS) $(EXTRA_LINKER)
 
 OBJS := $(shell cd src && find . -type f -iname '*.cpp' | sed 's/\.\///g' | sed 's/\.cpp/\.o/g' | xargs -I {} echo "$(OBJPATH)/"{})
