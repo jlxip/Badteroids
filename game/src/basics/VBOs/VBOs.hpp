@@ -15,10 +15,15 @@ namespace VBOs {
 	// --- BOOT TIME ---
 	VBOid makeVertices(const glm::vec2* vertices, size_t n);
 	VBOid makeIndices(const Index* indices, size_t n);
+	VBOid makeColors(const glm::vec3* colors, size_t n);
 
 	// --- RUN TIME ---
 	void useVertices(VBOid id);
+	void useColors(VBOid id);
 	void drawElements(VBOid id, size_t isize, GLenum mode);
+
+	// --- AXILIARY ---
+	VBOid requestGreenVBO(size_t vertices);
 };
 
 #endif
