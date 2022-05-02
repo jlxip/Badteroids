@@ -8,5 +8,6 @@ void preparations() {
 
 	// Game initialization
 	glClearColor(0.0, 0.0, 0.0, 1.0);
+	glEnable(GL_MULTISAMPLE); // AA
 	glfwSwapInterval(1); // VSync
 }

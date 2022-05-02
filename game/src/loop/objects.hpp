@@ -44,7 +44,7 @@ namespace Objects {
 			--last;
 		}
 
-		inline T& get(ObjID id) { return objs[id]; }
+		inline T& get(ObjID id) { return objs[lookup[id]]; }
 
 
 		// Very simple iterator
