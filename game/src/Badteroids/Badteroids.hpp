@@ -5,8 +5,10 @@
 
 class Badteroids {
 private:
+	Ship ship;
 
 public:
+	Badteroids();
 };
 
 #endif

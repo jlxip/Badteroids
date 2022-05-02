@@ -3,9 +3,9 @@
 #include "objects.hpp"
 
 extern GLFWwindow* window;
-Badteroids game;
 
-bool started = false;
+// Initialization is postponed, done in <preparations.cpp>
+Badteroids* game = nullptr;
 
 void mainLoop() {
 	// Reset everything
@@ -13,11 +13,6 @@ void mainLoop() {
 	glLoadIdentity();
 
 	// - Game starts here -
-	if(!started) {
-		//ShipModels::Dummy dummy;
-		Objects::drawables.alloc(ShipModels::Dummy());
-		started = true;
-	}
 
 	// Draw everything
 	for(auto& x : Objects::drawables)

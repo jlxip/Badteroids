@@ -1,5 +1,7 @@
 #include <Badteroids/Badteroids.hpp>
 
+extern Badteroids* game;
+
 // After the window has been created and OpenGL context set,
 //   this does further preparations before starting the main loop.
 void preparations() {
@@ -10,4 +12,6 @@ void preparations() {
 	glClearColor(0.0, 0.0, 0.0, 1.0);
 	glEnable(GL_MULTISAMPLE); // AA
 	glfwSwapInterval(1); // VSync
+
+	game = new Badteroids;
 }

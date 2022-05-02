@@ -17,21 +17,18 @@ protected:
 
 	size_t mode = GL_LINE_STRIP;
 
+	float scalex = 1.0;
+	float scaley = 1.0;
+	float movex = 0.0;
+	float movey = 0.0;
+
 public:
-	inline void draw() const {
-		// «Avoid making hundreds of glBindTexture calls per frame, basically»
+	inline void mulScalex(float a) { scalex *= a; }
+	inline void mulScaley(float a) { scaley *= a; }
+	inline void addx(float a) { movex += a; }
+	inline void addy(float a) { movey += a; }
 
-		// Vertices
-		glEnableClientState(GL_VERTEX_ARRAY);
-		glEnableClientState(GL_COLOR_ARRAY);
-
-		VBOs::useVertices(this->VBO_v);
-		VBOs::useColors(this->VBO_c);
-		VBOs::drawElements(this->VBO_i, this->isize, this->mode);
-
-		glDisableClientState(GL_COLOR_ARRAY);
-		glDisableClientState(GL_VERTEX_ARRAY);
-	}
+	void draw() const;
 };
 
 #endif
