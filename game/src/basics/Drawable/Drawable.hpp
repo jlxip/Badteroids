@@ -3,33 +3,31 @@
 
 #include <common.hpp>
 #include <vector>
+#include <basics/VBOs/VBOs.hpp>
 
-
-// Basic drawable object
-// Set of triangles
-
-typedef uint32_t VBOid;
-const VBOid NULL_VBO = 0;
-#define VBO_NULL_OFFSET 0
-
-typedef uint32_t Index;
+// Basic drawable object that does NOT change in shape
 
 class Drawable {
-private:
+protected:
 	VBOid VBO_v = NULL_VBO; // Vertices
 	VBOid VBO_i = NULL_VBO; // Triangles (indices)
 
-	const size_t coordsPerVertex = 2; // We're in 2D
-	const size_t stride = 0; // Values in vectors are tightly packed
+	size_t isize = 0; // How many indices?
 
-protected:
-	std::vector<glm::vec2> vertices;
-	std::vector<Index> indices;
-
-	size_t mode = GL_LINE_LOOP;
+	size_t mode = GL_LINE_STRIP;
 
 public:
-	void draw();
+	inline void draw() const {
+		// «Avoid making hundreds of glBindTexture calls per frame, basically»
+
+		// Vertices
+		glEnableClientState(GL_VERTEX_ARRAY);
+
+		VBOs::useVertices(this->VBO_v);
+		VBOs::drawElements(this->VBO_i, this->isize, this->mode);
+
+		glDisableClientState(GL_VERTEX_ARRAY);
+	}
 };
 
 #endif

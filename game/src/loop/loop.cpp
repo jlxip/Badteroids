@@ -1,19 +1,27 @@
 #include <common.hpp>
 #include <Badteroids/Badteroids.hpp>
+#include "objects.hpp"
 
 extern GLFWwindow* window;
 Badteroids game;
 
-#include <basics/shapes/Triangle/Triangle.hpp>
-static Triangle test(glm::vec2(0.0, 0.5), glm::vec2(-0.5, -0.5), glm::vec2(0.5, -0.5));
+bool started = false;
 
 void mainLoop() {
 	// Reset everything
 	glClear(GL_COLOR_BUFFER_BIT);
 	glLoadIdentity();
 
-	// Game start here
-	test.draw();
+	// - Game starts here -
+	if(!started) {
+		//ShipModels::Dummy dummy;
+		Objects::drawables.alloc(ShipModels::Dummy());
+		started = true;
+	}
+
+	// Draw everything
+	for(auto& x : Objects::drawables)
+		x.draw();
 
 	// Shoot frame and manage events
 	glfwSwapBuffers(window);

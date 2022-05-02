@@ -14,11 +14,14 @@ ifdef DEBUG
 CXXFLAGS_BASE += -g
 endif
 
-CXXFLAGS := $(INCLUDES) $(CXXFLAGS_BASE) $(CXXFLAGS_WARN)
+CXXFLAGS := $(INCLUDES) $(CXXFLAGS_BASE) $(CXXFLAGS_WARN) $(CXXFLAGS_OPTS)
 
 LINKER := $(CXX)
 EXTRA_LINKER := -lglfw -lGL -lGLU -lGLEW
 LINKER_FLAGS := $(CXXFLAGS) $(EXTRA_LINKER)
+
+STRIP := strip
+STRIP_OPTS := -s -R .comment -R .gnu.version --strip-unneeded
 
 OBJS := $(shell cd src && find . -type f -iname '*.cpp' | sed 's/\.\///g' | sed 's/\.cpp/\.o/g' | xargs -I {} echo "$(OBJPATH)/"{})
 
@@ -33,7 +36,7 @@ $(RESULT): $(OBJS)
 	@$(LINKER) $(LINKER_FLAGS) $(OBJS) -o $@
 	@if [[ ! -v DEBUG ]]; then \
 		echo "Stripping..."; \
-		strip $(RESULT); \
+		$(STRIP) $(STRIP_OPTS) $(RESULT); \
 	fi
 
 -include $(OBJS:.o=.o.d)

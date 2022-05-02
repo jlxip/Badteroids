@@ -1,6 +1,4 @@
-#include <common.hpp>
-#include <GLFW/glfw3.h>
-#include <GL/glu.h>
+#include "events.hpp"
 
 void framebufferSizeCallback(GLFWwindow* window, int width, int height) {
 	IGNORE(window);

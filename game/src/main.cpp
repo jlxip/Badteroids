@@ -1,13 +1,6 @@
-#include <common.hpp>
+#include <events/events.hpp>
 
-void errorCallback(int error, const char* description) {
-	std::cerr << "Error " << error << std::endl;
-	std::cerr << description << std::endl;
-	exit(error);
-}
-
-void keyCallback(GLFWwindow*, int, int, int, int);
-void framebufferSizeCallback(GLFWwindow*, int, int);
+void preparations();
 void mainLoop();
 
 GLFWwindow* window;
@@ -17,6 +10,7 @@ const size_t START_HEIGHT = 480;
 const char winName[] = "Badteroids";
 
 int main() {
+	std::cout << "Initializing window and OpenGL context" << std::endl;
 	if(!glfwInit()) {
 		std::cerr << "Could not initialize GLFW" << std::endl;
 		return 1;
@@ -49,19 +43,22 @@ int main() {
 		return 3;
 	}
 
-	// Game initialization
-	glfwSwapInterval(1); // VSync
-	glClearColor(0.0, 0.0, 0.0, 1.0);
-
 	// Set framebuffer
 	int width, height;
 	glfwGetFramebufferSize(window, &width, &height);
 	framebufferSizeCallback(window, width, height);
 
+
+
+	std::cout << "Last minute preparations..." << std::endl;
+	preparations();
+
 	// Go!
+	std::cout << "Starting main loop" << std::endl;
 	while(!glfwWindowShouldClose(window))
 		mainLoop();
 
+	std::cout << "Thanks for playing!" << std::endl;
 	glfwDestroyWindow(window);
 	glfwTerminate();
 	return 0;
