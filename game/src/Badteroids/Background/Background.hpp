@@ -9,10 +9,13 @@
 class Background {
 public:
 	class BGDraw : public Drawable {
+	private:
+		float velocity = .5; // Windows per second
 	public:
 		static void upload();
 		BGDraw();
 		inline void setTexID(TexID id) { this->texture = id; }
+		void textick(float dt);
 	};
 
 private:

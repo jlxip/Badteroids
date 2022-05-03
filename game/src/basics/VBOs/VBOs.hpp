@@ -12,12 +12,14 @@ typedef uint32_t VBOid;
 const VBOid NULL_VBO = 0;
 
 namespace VBOs {
+	void overwriteVBO(VBOid, GLuint type, GLuint sz, const GLvoid*, bool dynamic);
+
 	// --- BOOT TIME ---
-	VBOid makeVertices(const glm::vec2* vertices, size_t n);
-	VBOid makeIndices(const Index* indices, size_t n);
-	VBOid makeColors(const glm::vec3* colors, size_t n);
-	inline VBOid makeTextureCoords(const glm::vec2* texc, size_t n) {
-		return makeVertices(texc, n);
+	VBOid makeVertices(const glm::vec2* vertices, size_t n, bool dynamic=false);
+	VBOid makeIndices(const Index* indices, size_t n, bool dynamic=false);
+	VBOid makeColors(const glm::vec3* colors, size_t n, bool dynamic=false);
+	inline VBOid makeTextureCoords(const glm::vec2* texc, size_t n, bool dynamic=false) {
+		return makeVertices(texc, n, dynamic);
 	}
 
 	// --- RUN TIME ---

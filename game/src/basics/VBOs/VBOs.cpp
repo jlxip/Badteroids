@@ -1,26 +1,31 @@
 #include "VBOs.hpp"
 
-static VBOid makeVBO(GLuint type, GLuint sz, const GLvoid* ptr) {
+static VBOid makeVBO(GLuint type, GLuint sz, const GLvoid* ptr, bool dynamic) {
 	VBOid ret;
 	glGenBuffers(1, &ret); // Creation
-	glBindBuffer(type, ret); // Attach
-	glBufferData(type, sz, ptr, GL_STATIC_DRAW); // Transfer RAM -> GPU
-	glBindBuffer(type, NULL_VBO); // Deattach
+	VBOs::overwriteVBO(ret, type, sz, ptr, dynamic);
 	return ret;
+}
+
+void VBOs::overwriteVBO(VBOid id, GLuint type, GLuint sz, const GLvoid* ptr, bool dynamic) {
+	glBindBuffer(type, id); // Attach
+	GLenum flag = dynamic ? GL_STREAM_DRAW : GL_STATIC_DRAW;
+	glBufferData(type, sz, ptr, flag); // Transfer RAM -> GPU
+	glBindBuffer(type, NULL_VBO); // Deattach
 }
 
 // --- BOOT TIME ---
 // These are only called when starting the game
-VBOid VBOs::makeVertices(const glm::vec2* vertices, size_t n) {
-	return makeVBO(GL_ARRAY_BUFFER, n * sizeof(glm::vec2), vertices);
+VBOid VBOs::makeVertices(const glm::vec2* vertices, size_t n, bool dynamic) {
+	return makeVBO(GL_ARRAY_BUFFER, n * sizeof(glm::vec2), vertices, dynamic);
 }
 
-VBOid VBOs::makeColors(const glm::vec3* colors, size_t n) {
-	return makeVBO(GL_ARRAY_BUFFER, n * sizeof(glm::vec3), colors);
+VBOid VBOs::makeColors(const glm::vec3* colors, size_t n, bool dynamic) {
+	return makeVBO(GL_ARRAY_BUFFER, n * sizeof(glm::vec3), colors, dynamic);
 }
 
-VBOid VBOs::makeIndices(const Index* indices, size_t n) {
-	return makeVBO(GL_ELEMENT_ARRAY_BUFFER, n * sizeof(Index), indices);
+VBOid VBOs::makeIndices(const Index* indices, size_t n, bool dynamic) {
+	return makeVBO(GL_ELEMENT_ARRAY_BUFFER, n * sizeof(Index), indices, dynamic);
 }
 
 // --- RUN TIME ---

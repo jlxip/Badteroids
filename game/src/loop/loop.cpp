@@ -16,13 +16,15 @@ void mainLoop() {
 	glLoadIdentity();
 
 	// - Game starts here -
-
-	// Background (a bit different than other objects)
-	game->getBackground().getDraw().draw();
-
-	// Tick and draw inertials drawables
 	double t = glfwGetTime();
 	double dt = t - lastTick;
+
+	// Background (a bit different than other objects)
+	auto& bgdraw = game->getBackground().getDraw();
+	bgdraw.textick(dt);
+	bgdraw.draw();
+
+	// Tick and draw inertials drawables
 	for(auto& x : Objects::idrawables) {
 		x.tick(dt);
 		x.draw();
