@@ -14,4 +14,5 @@ void preparations() {
 	glfwSwapInterval(1); // VSync
 
 	game = new Badteroids;
+	glfwSetTime(0); // Here we go, physics
 }

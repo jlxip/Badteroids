@@ -20,6 +20,12 @@ La plataforma objetivo es GNU/Linux. Existirá la posibilidad de fabricar binari
 ** Gameplay y mecánicas
 *** Núcleo del gameplay
 La idea detrás del gameplay es modesta: en pantalla dividida, los jugadores avanzan e intentan evitar el avance de su oponente.
+**** Movimiento
+Uno de los intereses de Badteroids se encuentra en que los sucesos ocurren en el espacio. Por lo tanto, no hay presencia de atmósfera, sino vacío. Así, todo movimiento no es frenado por el rozamiento del aire, sino que el momento lineal se conserva. Cada pulsación de tecla conlleva un incremento de velocidad en un eje a costa de una disminución del recurso que se expulsa para conseguir dicho movimiento. Aplica, entonces, la primera ley de Newton: para frenar, es necesario crear un empuje (/thrust/) en el sentido opuesto.
+
+El jugador deberá tener cuidado con no pasar los límites de la pantalla y frenar antes. En otro caso, perderá la partida.
+
+Con tal de mantener la atención del jugador, la nave no puede mantenerse en reposo (relativo a la pantalla). Siempre toma lugar un pequeño movimiento incorregible. Comienza siendo uno pequeño hacia arriba a la derecha, en el caso de la nave de la izquierda, y hacia arriba a la izquierda en el caso de la de la derecha. Además, cada vez que el jugador efectúa un movimiento, se produce una desviación aleatoria de hasta el 5%.
 **** Combate
 Un jugador deberá debilitar al oponente con tal de frenar su avance. De no preocuparse por ello, el otro jugador ganará por tiempo. En caso de ambos no combatir, gana la Ciudadela.
 
@@ -66,5 +72,7 @@ Todo ser vivo, y esto incluye los seres de Andrómeda, necesita oxígeno para ma
 ** Mercado
 Badteroids está bajo la licencia de /izquierdos de autor/ GNU General Public License v3, y su distribución se llevará a cabo en este mismo repositorio de GitHub de forma gratuita, sin modo oficial de pagar por él.
 ** Historial de cambios
+*** Versión 0.2
+Añadida mecánica de movimiento inercial y con desviación aleatoria.
 *** Versión 0.1
 Primera redacción del documento.

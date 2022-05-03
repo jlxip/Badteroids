@@ -1,9 +1,10 @@
 #ifndef OBJECTS_HPP
 #define OBJECTS_HPP
 
-#include <basics/Drawable/Drawable.hpp>
 #include <memory>
 #include <algorithm>
+
+#include <basics/Drawable/Drawable.hpp>
 
 typedef size_t ObjID;
 
@@ -21,14 +22,14 @@ namespace Objects {
 	public:
 		ObjID alloc(T&& obj) {
 			if(!size) {
-				objs = (Drawable*)malloc(2*sizeof(T));
+				objs = (T*)malloc(2*sizeof(T));
 				lookup = (ObjID*)malloc(2*sizeof(ObjID));
 				size = 2;
 			}
 
 			++last;
 			if(last >= size) {
-				objs = (Drawable*)realloc(objs, sizeof(T)*2*size);
+				objs = (T*)realloc(objs, sizeof(T)*2*size);
 				lookup = (ObjID*)realloc(lookup, sizeof(ObjID)*2*size);
 				size *= 2;
 			}
@@ -48,12 +49,13 @@ namespace Objects {
 
 
 		// Very simple iterator
-		typedef const T* const_iterator;
-		inline const_iterator begin() const { return objs; }
-		inline const_iterator end() const { return &objs[last + 1]; } // Not size!
+		typedef T* iterator;
+		inline iterator begin() { return objs; }
+		inline iterator end() { return &objs[last + 1]; } // Not size!
 	};
 
 	extern Array<Drawable> drawables;
+	extern Array<Drawable> idrawables;
 };
 
 #endif
