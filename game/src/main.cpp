@@ -22,6 +22,7 @@ int main() {
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
 	glfwWindowHint(GLFW_SAMPLES, MSAAxn); // Multisampling anti-aliasing
+	//glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE); // Does this make a difference?
 	window = glfwCreateWindow(START_WIDTH, START_HEIGHT, winName, NULL, NULL);
 	if(!window) {
 		std::cerr << "Could not create window" << std::endl;

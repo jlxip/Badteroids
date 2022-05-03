@@ -1,4 +1,7 @@
 #include "events.hpp"
+#include <Badteroids/Badteroids.hpp>
+
+extern Badteroids* game;
 
 void framebufferSizeCallback(GLFWwindow* window, int width, int height) {
 	IGNORE(window);
@@ -13,4 +16,10 @@ void framebufferSizeCallback(GLFWwindow* window, int width, int height) {
 	gluOrtho2D(-1, 1, -1, 1);
 	// Go back
 	glMatrixMode(GL_MODELVIEW);
+
+	// New background
+	if(game) {
+		game->getBackground().generate(width, height);
+		game->getBackground().upload();
+	}
 }

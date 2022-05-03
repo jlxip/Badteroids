@@ -11,7 +11,7 @@ void Background::generate(size_t width_, size_t height_) {
 	this->height = height_;
 
 	size_t pixels = width_ * height_;
-	this->texture = new unsigned char[pixels*3];
+	this->texture = new uint8_t[pixels*3];
 
 	// Fill the texture with black
 	memset(this->texture, 0, pixels*3);
@@ -40,6 +40,10 @@ void Background::generate(size_t width_, size_t height_) {
 }
 
 void Background::upload() {
-	tex = Textures::makeTexture(texture, width, height);
-	drawable.setTexID(tex);
+	if(!tex) {
+		tex = Textures::makeTexture(texture, width, height);
+		drawable.setTexID(tex);
+	} else {
+		Textures::overwriteTexture(tex, texture, width, height);
+	}
 }

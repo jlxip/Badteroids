@@ -16,7 +16,7 @@ public:
 	};
 
 private:
-	unsigned char* texture = nullptr;
+	uint8_t* texture = nullptr;
 	size_t width = 0;
 	size_t height = 0;
 
