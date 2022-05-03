@@ -25,7 +25,7 @@ Uno de los intereses de Badteroids se encuentra en que los sucesos ocurren en el
 
 El jugador deberá tener cuidado con no pasar los límites de la pantalla y frenar antes. En otro caso, perderá la partida.
 
-Con tal de mantener la atención del jugador, la nave no puede mantenerse en reposo (relativo a la pantalla). Siempre toma lugar un pequeño movimiento incorregible. Comienza siendo uno pequeño hacia arriba a la derecha, en el caso de la nave de la izquierda, y hacia arriba a la izquierda en el caso de la de la derecha. Además, cada vez que el jugador efectúa un movimiento, se produce una desviación aleatoria de hasta el 5%.
+Con tal de mantener la atención del jugador, la nave no puede mantenerse en reposo (relativo a la pantalla). Siempre toma lugar un pequeño movimiento incorregible. Comienza siendo uno pequeño hacia arriba a la derecha, en el caso de la nave de la izquierda, y hacia arriba a la izquierda en el caso de la de la derecha. Además, cada vez que el jugador efectúa un movimiento, se produce una desviación aleatoria de hasta el ±5%.
 **** Combate
 Un jugador deberá debilitar al oponente con tal de frenar su avance. De no preocuparse por ello, el otro jugador ganará por tiempo. En caso de ambos no combatir, gana la Ciudadela.
 
@@ -72,7 +72,9 @@ Todo ser vivo, y esto incluye los seres de Andrómeda, necesita oxígeno para ma
 ** Mercado
 Badteroids está bajo la licencia de /izquierdos de autor/ GNU General Public License v3, y su distribución se llevará a cabo en este mismo repositorio de GitHub de forma gratuita, sin modo oficial de pagar por él.
 ** Historial de cambios
+*** Versión 0.2.1
+- Cambiada la desviación aleatoria de movimiento de +5% a ±5%.
 *** Versión 0.2
-Añadida mecánica de movimiento inercial y con desviación aleatoria.
+- Añadida mecánica de movimiento inercial y con desviación aleatoria.
 *** Versión 0.1
-Primera redacción del documento.
+- Primera redacción del documento.
