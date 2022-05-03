@@ -4,6 +4,7 @@
 #include <common.hpp>
 #include <vector>
 #include <basics/VBOs/VBOs.hpp>
+#include <basics/Textures/Textures.hpp>
 
 // Basic drawable object that does NOT change in shape
 
@@ -27,6 +28,9 @@ protected:
 		float vx = 0.0;
 		float vy = 0.0;
 	} inertia;
+
+	TexID texture = NULL_TEXTURE;
+	VBOid VBO_t = NULL_VBO;
 
 public:
 	inline void mulScalex(float a) { scalex *= a; }

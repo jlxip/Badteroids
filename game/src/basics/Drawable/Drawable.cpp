@@ -6,20 +6,31 @@ void Drawable::tick(float dt) {
 }
 
 void Drawable::draw() const {
-	// «Avoid making hundreds of glBindTexture calls per frame, basically»
-
 	glLoadIdentity();
 	glTranslatef(x, y, 0.0);
 	glScalef(scalex, scaley, 1.0);
 
 	// Vertices
 	glEnableClientState(GL_VERTEX_ARRAY);
-	glEnableClientState(GL_COLOR_ARRAY);
 
 	VBOs::useVertices(this->VBO_v);
-	VBOs::useColors(this->VBO_c);
+
+	if(this->VBO_c) {
+		glEnableClientState(GL_COLOR_ARRAY);
+		VBOs::useColors(this->VBO_c);
+	}
+
+	if(this->VBO_t) {
+		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+		glEnable(GL_TEXTURE_2D);
+		Textures::useTexture(this->texture);
+		VBOs::useTextureCoords(this->VBO_t);
+	}
+
 	VBOs::drawElements(this->VBO_i, this->isize, this->mode);
 
+	glDisable(GL_TEXTURE_2D);
+	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 	glDisableClientState(GL_COLOR_ARRAY);
 	glDisableClientState(GL_VERTEX_ARRAY);
 }

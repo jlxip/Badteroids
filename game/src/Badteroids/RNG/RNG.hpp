@@ -9,6 +9,7 @@ namespace RNG {
 		enum {
 			LEFT_SHIP_DEVIATION,
 			RIGHT_SHIP_DEVIATION,
+			BACKGROUND,
 			N_AREAS
 		};
 	};

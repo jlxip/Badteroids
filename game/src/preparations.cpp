@@ -7,6 +7,7 @@ extern Badteroids* game;
 void preparations() {
 	// Upload all models to GPU
 	ShipModels::Dummy::upload();
+	Background::BGDraw::upload();
 
 	// Game initialization
 	glClearColor(0.0, 0.0, 0.0, 1.0);

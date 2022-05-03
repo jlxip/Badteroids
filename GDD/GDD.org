@@ -65,13 +65,18 @@ El hidrógeno hace de combustible en Badteroids. Quedarse sin él implicaría ce
 Todo ser vivo, y esto incluye los seres de Andrómeda, necesita oxígeno para mantener una atmósfera en la cual sobrevivir. No siendo esto bastante, es además necesario en pequeñas cantidades como catalizador en las combustiones de hidrógeno. Quedarse sin oxígeno conllevaría la muerte inmediata del comandante.
 *** Fases de la carrera
 (Pendiente de definir)
-** Interfaz
-(Pendiente de definir)
+** Interfaz y gráficos
+*** El fondo
+En la partida, en todo momento hay un fondo estelado, cargado de una textura generada aleatoriamente en el momento. Se genera proceduramente, lo que no limita la resolución a la que se debe jugar.
+
+Además, el fondo está en todo momento en movimiento para dar la sensación de velocidad. Al principio, el movimiento es lento. Cuando se acerca el final del juego, la atracción gravitatoria del agujero negro es mayor, lo que provoca una fuerza (aceleración) mayor, y el movimiento del fondo es mayor.
 ** Generación de mundo
 (Pendiente de definir)
 ** Mercado
 Badteroids está bajo la licencia de /izquierdos de autor/ GNU General Public License v3, y su distribución se llevará a cabo en este mismo repositorio de GitHub de forma gratuita, sin modo oficial de pagar por él.
 ** Historial de cambios
+*** Versión 0.3
+- Comenzado "Interfaz y gráficos" con "El fondo"
 *** Versión 0.2.1
 - Cambiada la desviación aleatoria de movimiento de +5% a ±5%.
 *** Versión 0.2

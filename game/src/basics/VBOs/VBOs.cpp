@@ -50,6 +50,16 @@ void VBOs::useColors(VBOid id) {
 	glBindBuffer(GL_ARRAY_BUFFER, NULL_VBO); // Deattach
 }
 
+void VBOs::useTextureCoords(VBOid id) {
+	// Assuming GL_TEXTURE_COORD_ARRAY is enabled
+	glBindBuffer(GL_ARRAY_BUFFER, id); // Attach
+	glTexCoordPointer(coordsPerVertex,
+					  GL_FLOAT,
+					  stride,
+					  VBO_NULL_OFFSET);
+	glBindBuffer(GL_ARRAY_BUFFER, NULL_VBO); // Deattach
+}
+
 void VBOs::drawElements(VBOid id, size_t isize, GLenum mode) {
 	// Assuming GL_VERTEX_ARRAY is enabled
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, id); // Attach

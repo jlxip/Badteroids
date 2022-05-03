@@ -16,10 +16,14 @@ namespace VBOs {
 	VBOid makeVertices(const glm::vec2* vertices, size_t n);
 	VBOid makeIndices(const Index* indices, size_t n);
 	VBOid makeColors(const glm::vec3* colors, size_t n);
+	inline VBOid makeTextureCoords(const glm::vec2* texc, size_t n) {
+		return makeVertices(texc, n);
+	}
 
 	// --- RUN TIME ---
 	void useVertices(VBOid id);
 	void useColors(VBOid id);
+	void useTextureCoords(VBOid id);
 	void drawElements(VBOid id, size_t isize, GLenum mode);
 
 	// --- AXILIARY ---

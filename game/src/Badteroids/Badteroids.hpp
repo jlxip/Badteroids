@@ -2,6 +2,7 @@
 #define BADTEROIDS_HPP
 
 #include "Ship/Ship.hpp"
+#include "Background/Background.hpp"
 
 // Welcome.
 // All objects in Badteroids live in a [-1, +1]x[-1, +1] plane
@@ -10,6 +11,9 @@
 
 class Badteroids {
 private:
+	int width, height;
+	Background background;
+
 	Ship leftShip = Ship(false);
 	//Ship rightShip;
 
@@ -17,6 +21,7 @@ public:
 	Badteroids();
 	void registerEvents();
 
+	inline Background& getBackground() { return background; }
 	Ship& getLeftShip() { return leftShip; }
 	//Ship& getRightShip() { return rightShip; }
 };
