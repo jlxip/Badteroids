@@ -23,8 +23,8 @@ private:
 	size_t width = 0;
 	size_t height = 0;
 
-	const float density = 0.25;
-	const float brightness = 0.125;
+	const float density = 0.01;
+	const float brightness = 0.5;
 
 	TexID tex = NULL_TEXTURE;
 	BGDraw drawable;

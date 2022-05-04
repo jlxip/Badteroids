@@ -3,6 +3,8 @@
 #include <cmath>
 #include <cstring>
 
+// Many thanks: https://wwwtyro.net/2016/10/22/2D-space-scene-procgen.html
+
 void Background::generate(size_t width_, size_t height_) {
 	if(this->texture)
 		delete [] (this->texture);

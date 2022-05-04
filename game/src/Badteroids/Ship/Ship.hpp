@@ -2,6 +2,7 @@
 #define SHIP_HPP
 
 #include "models/ShipModel.hpp"
+#include "Laser/Laser.hpp"
 #include <loop/objects.hpp>
 
 // A Ship object lives in one side of the screen
@@ -30,6 +31,7 @@ public:
 	void moveRight();
 	void moveUp();
 	void moveDown();
+	void shoot();
 };
 
 #endif

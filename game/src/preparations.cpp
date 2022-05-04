@@ -1,4 +1,5 @@
 #include <Badteroids/Badteroids.hpp>
+#include <basics/models/Square/Square.hpp>
 
 extern Badteroids* game;
 
@@ -6,8 +7,10 @@ extern Badteroids* game;
 //   this does further preparations before starting the main loop.
 void preparations() {
 	// Upload all models to GPU
+	BasicModels::Square::upload();
 	ShipModels::Dummy::upload();
 	Background::BGDraw::upload();
+	Laser::upload();
 
 	// Game initialization
 	glClearColor(0.0, 0.0, 0.0, 1.0);

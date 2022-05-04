@@ -33,6 +33,9 @@ protected:
 	VBOid VBO_t = NULL_VBO;
 
 public:
+	inline float getx() const { return x; }
+	inline float gety() const { return y; }
+
 	inline void mulScalex(float a) { scalex *= a; }
 	inline void mulScaley(float a) { scaley *= a; }
 	inline void addx(float a) { x += a; }

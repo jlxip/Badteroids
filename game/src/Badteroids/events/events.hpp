@@ -14,4 +14,10 @@ void lsDown();
 
 // Right ship
 
+// --- ACTIONS ---
+// Left ship
+void lsShoot();
+
+// Right ship
+
 #endif

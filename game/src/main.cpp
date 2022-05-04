@@ -5,8 +5,8 @@ void mainLoop();
 
 GLFWwindow* window;
 
-const size_t START_WIDTH = 640;
-const size_t START_HEIGHT = 480;
+const size_t START_WIDTH = 1280;
+const size_t START_HEIGHT = 720;
 const char winName[] = "Badteroids";
 
 const size_t MSAAxn = 16;
