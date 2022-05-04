@@ -1,12 +1,15 @@
 #include "Ship.hpp"
 
 void Ship::shoot() {
-	Drawable& drawable = Objects::idrawables.get(model);
+	Drawable& me = Objects::idrawables.get(model);
 
 	// Clearly, X is ship's
-	float x = drawable.getx();
+	float x = me.getx();
 	// Y is displaced to the top
-	float y = drawable.gety() + Laser::sy;
+	float y = me.gety() + Laser::sy;
 
 	Objects::idrawables.alloc(Laser(x, y));
+
+	// Blowback
+	me.getInertia().vy -= shootBlowback;
 }

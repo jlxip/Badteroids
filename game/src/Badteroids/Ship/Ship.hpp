@@ -21,6 +21,9 @@ private:
 	float maxDeviation = velocityPerPress * 0.05; // 5%
 	bool iam;
 
+	// Not physically accurate, but playable
+	const float shootBlowback = Laser::thevy / 8;
+
 public:
 	Ship(bool iam_);
 
