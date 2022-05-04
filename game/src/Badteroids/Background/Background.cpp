@@ -46,6 +46,7 @@ void Background::upload() {
 		tex = Textures::makeTexture(texture, width, height);
 		drawable.setTexID(tex);
 	} else {
+		// Only when resizing screen, don't worry.
 		Textures::overwriteTexture(tex, texture, width, height);
 	}
 }

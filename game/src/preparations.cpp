@@ -1,5 +1,6 @@
 #include <Badteroids/Badteroids.hpp>
 #include <basics/models/Square/Square.hpp>
+#include <basics/Text/Text.hpp>
 
 extern Badteroids* game;
 
@@ -7,6 +8,7 @@ extern Badteroids* game;
 //   this does further preparations before starting the main loop.
 void preparations() {
 	// Upload all models to GPU
+	Text::Fonts::upload();
 	BasicModels::Square::upload();
 	ShipModels::Dummy::upload();
 	Background::BGDraw::upload();

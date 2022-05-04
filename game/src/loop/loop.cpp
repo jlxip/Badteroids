@@ -11,13 +11,15 @@ Badteroids* game = nullptr;
 double lastTick = 0;
 
 void mainLoop() {
+	// First, take the time
+	double t = glfwGetTime();
+	double dt = t - lastTick;
+
 	// Reset everything
 	glClear(GL_COLOR_BUFFER_BIT);
 	glLoadIdentity();
 
 	// - Game starts here -
-	double t = glfwGetTime();
-	double dt = t - lastTick;
 
 	// Background (a bit different than other objects)
 	auto& bgdraw = game->getBackground().getDraw();
