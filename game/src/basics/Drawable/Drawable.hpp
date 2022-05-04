@@ -41,6 +41,22 @@ public:
 	inline void addx(float a) { x += a; }
 	inline void addy(float a) { y += a; }
 
+	static constexpr float OOB_MARGIN = 0.1;
+	inline bool outOfBounds() const {
+		if(x > (1+OOB_MARGIN) || y > (1+OOB_MARGIN))
+			return true;
+
+		// If all drawables are designed so that there's at least a vertex
+		//   touching each border, then scalex=width and scaley=height, and
+		//   we can do this:
+		if((x + scalex) < (-1-OOB_MARGIN))
+			return true;
+		if((y + scaley) < (-1-OOB_MARGIN))
+			return true;
+
+		return false;
+	}
+
 	inline Inertia& getInertia() { return inertia; }
 
 	void tick(float dt);

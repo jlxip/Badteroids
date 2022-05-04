@@ -39,12 +39,15 @@ namespace Objects {
 			return last;
 		}
 
-		inline void free(ObjID id) {
+	private:
+		// Beware: this uses internal ObjIDs (non-constant)
+		inline void _free(ObjID id) {
 			std::swap(objs[id], objs[last]);
 			lookup[last] = id;
 			--last;
 		}
 
+	public:
 		inline T& get(ObjID id) { return objs[lookup[id]]; }
 
 
@@ -52,6 +55,7 @@ namespace Objects {
 		typedef T* iterator;
 		inline iterator begin() { return objs; }
 		inline iterator end() { return &objs[last + 1]; } // Not size!
+		inline void free(iterator it) { _free(it - objs); }
 	};
 
 	extern Array<Drawable> drawables;

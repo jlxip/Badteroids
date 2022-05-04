@@ -24,15 +24,20 @@ void mainLoop() {
 	bgdraw.textick(dt);
 	bgdraw.draw();
 
-	// Tick and draw inertials drawables
-	for(auto& x : Objects::idrawables) {
-		x.tick(dt);
-		x.draw();
+	// Tick and draw inertials drawables, free if they've gone away
+	auto iti = Objects::idrawables.begin();
+	while(iti != Objects::idrawables.end()) {
+		iti->tick(dt);
+		iti->draw();
+		if(iti->outOfBounds())
+			Objects::idrawables.free(iti);
+		else
+			++iti;
 	}
 
 	lastTick = t;
 
-	// Draw everything
+	// Draw regular drawables
 	for(auto& x : Objects::drawables)
 		x.draw();
 
