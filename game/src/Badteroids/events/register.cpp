@@ -9,7 +9,15 @@ void Badteroids::registerEvents() {
 	Keyboard::setKeyPress('W', lsUp);
 	Keyboard::setKeyPress('S', lsDown);
 
+	Keyboard::setKeyPress('J', rsLeft);
+	Keyboard::setKeyPress('L', rsRight);
+	Keyboard::setKeyPress('I', rsUp);
+	Keyboard::setKeyPress('K', rsDown);
+
 	// --- ACTIONS ---
-	// Shoot with index finger, the most comfortable finger for the most common action
+	// Shoot with index finger, the most comfortable finger
+	//   for the most common action.
 	Keyboard::setKeyPress('E', lsShoot);
+
+	Keyboard::setKeyPress('U', rsShoot);
 }

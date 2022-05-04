@@ -12,9 +12,8 @@ void Ship::_move(float dx, float dy) {
 	else
 		dy += deviation;
 
-	Drawable& d = Objects::idrawables.get(this->model);
-	d.getInertia().vx += dx;
-	d.getInertia().vy += dy;
+	this->model.getInertia().vx += dx;
+	this->model.getInertia().vy += dy;
 }
 
 

@@ -14,8 +14,8 @@ private:
 	int width, height;
 	Background background;
 
-	Ship leftShip = Ship(false);
-	//Ship rightShip;
+	Ship leftShip = Ship(LEFT_SHIP);
+	Ship rightShip = Ship(RIGHT_SHIP);
 
 public:
 	Badteroids();
@@ -23,7 +23,7 @@ public:
 
 	inline Background& getBackground() { return background; }
 	Ship& getLeftShip() { return leftShip; }
-	//Ship& getRightShip() { return rightShip; }
+	Ship& getRightShip() { return rightShip; }
 };
 
 #endif

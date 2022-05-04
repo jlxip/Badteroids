@@ -41,6 +41,7 @@ public:
 	inline void addx(float a) { x += a; }
 	inline void addy(float a) { y += a; }
 
+	// Regular out of bounds for garbage collection
 	static constexpr float OOB_MARGIN = 0.1;
 	inline bool outOfBounds() const {
 		if(x > (1+OOB_MARGIN) || y > (1+OOB_MARGIN))

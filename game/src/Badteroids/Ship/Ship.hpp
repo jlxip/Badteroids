@@ -13,7 +13,7 @@
 
 class Ship {
 private:
-	ObjID model;
+	Drawable model;
 	const float shipScalex = 0.02;
 	const float shipScaley = 0.04;
 
@@ -24,10 +24,17 @@ private:
 	// Not physically accurate, but playable
 	const float shootBlowback = Laser::thevy / 8;
 
+	// Some bounds
+	float minx, maxx; // Derived from "iam"
+	static constexpr float miny = -1;
+	static constexpr float maxy = +1;
+
 public:
 	Ship(bool iam_);
 
-	inline ObjID getModel() const { return model; }
+	inline Drawable& getModel() { return model; }
+
+	bool checkBounds() const;
 
 	void _move(float dx, float dy);
 	void moveLeft();

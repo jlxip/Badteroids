@@ -13,11 +13,16 @@ void lsUp();
 void lsDown();
 
 // Right ship
+void rsLeft();
+void rsRight();
+void rsUp();
+void rsDown();
 
 // --- ACTIONS ---
 // Left ship
 void lsShoot();
 
 // Right ship
+void rsShoot();
 
 #endif
