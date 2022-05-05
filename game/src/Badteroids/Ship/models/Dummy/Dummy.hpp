@@ -1,4 +1,4 @@
-#ifndef DUMMY_SHIP_HP
+#ifndef DUMMY_SHIP_HPP
 #define DUMMY_SHIP_HPP
 
 #include <basics/Drawable/Drawable.hpp>

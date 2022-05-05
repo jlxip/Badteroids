@@ -10,8 +10,6 @@ public:
 	struct Fonts {
 		enum { HACK, N_FONTS };
 
-		static constexpr char pathHack[] = "assets/fonts/Hack.bmp";
-
 		static void upload();
 	};
 

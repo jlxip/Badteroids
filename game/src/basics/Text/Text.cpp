@@ -3,6 +3,8 @@
 
 static Font fonts[Text::Fonts::N_FONTS];
 
+static const char pathHack[] = "assets/fonts/Hack.bmp";
+
 void Text::Fonts::upload() {
 	fonts[HACK].load(pathHack);
 }

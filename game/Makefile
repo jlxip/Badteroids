@@ -6,22 +6,31 @@ OBJPATH := obj
 CXX := g++
 INCLUDES := -Isrc
 
+ifeq ($(shell uname -s),Darwin)
+	INCLUDES += -I/opt/homebrew/include
+endif
+
 CXXFLAGS_BASE := -std=c++11 -O2
 CXXFLAGS_WARN := -Wall -Wextra -Werror
 CXXFLAGS_OPTS := -fno-exceptions -fno-rtti
 
-ifdef DEBUG
-CXXFLAGS_BASE += -g
+ifeq ($(shell uname -s),Darwin)
+	CXXFLAGS_WARN := -Wno-deprecated-declarations
 endif
 
 CXXFLAGS := $(INCLUDES) $(CXXFLAGS_BASE) $(CXXFLAGS_WARN) $(CXXFLAGS_OPTS)
 
 LINKER := $(CXX)
-EXTRA_LINKER := -lglfw -lGL -lGLU -lGLEW
+ifeq ($(shell uname -s),Darwin)
+	LINKER += -L/opt/homebrew/lib
+	EXTRA_LINKER += -framework OpenGL
+else
+	EXTRA_LINKER += -lGL -lGLU
+endif
+EXTRA_LINKER += -lglfw -lGLEW
 LINKER_FLAGS := $(CXXFLAGS) $(EXTRA_LINKER)
 
 STRIP := strip
-STRIP_OPTS := -s -R .comment -R .gnu.version --strip-unneeded
 
 OBJS := $(shell cd src && find . -type f -iname '*.cpp' | sed 's/\.\///g' | sed 's/\.cpp/\.o/g' | xargs -I {} echo "$(OBJPATH)/"{})
 
@@ -34,10 +43,7 @@ run: all
 $(RESULT): $(OBJS)
 	@echo "Linking..."
 	@$(LINKER) $(LINKER_FLAGS) $(OBJS) -o $@
-	@if [[ ! -v DEBUG ]]; then \
-		echo "Stripping..."; \
-		$(STRIP) $(STRIP_OPTS) $(RESULT); \
-	fi
+	@$(STRIP) $@
 
 -include $(OBJS:.o=.o.d)
 
