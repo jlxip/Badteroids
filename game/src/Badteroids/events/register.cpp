@@ -20,4 +20,7 @@ void Badteroids::registerEvents() {
 	Keyboard::setKeyPress('Q', lsShoot);
 
 	Keyboard::setKeyPress('U', rsShoot);
+
+	// --- META ---
+	Keyboard::setKeyPress(GLFW_KEY_F12, _switchShowFPS);
 }

@@ -17,13 +17,18 @@ private:
 	Ship leftShip = Ship(LEFT_SHIP);
 	Ship rightShip = Ship(RIGHT_SHIP);
 
+	bool showFPS = false;
+
 public:
 	Badteroids();
 	void registerEvents();
 
 	inline Background& getBackground() { return background; }
-	Ship& getLeftShip() { return leftShip; }
-	Ship& getRightShip() { return rightShip; }
+	inline Ship& getLeftShip() { return leftShip; }
+	inline Ship& getRightShip() { return rightShip; }
+
+	inline bool getShowFPS() const { return showFPS; }
+	inline void switchShowFPS() { showFPS = !showFPS; }
 };
 
 #endif

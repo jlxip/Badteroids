@@ -1,6 +1,7 @@
 #include "events.hpp"
+#include <iostream>
 
-#define MAX_KEYS 256
+#define MAX_KEYS 512
 static void* presses[MAX_KEYS] = {nullptr};
 static void* releases[MAX_KEYS] = {nullptr};
 

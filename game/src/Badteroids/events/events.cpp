@@ -14,3 +14,5 @@ void rsDown() { game->getRightShip().moveDown(); }
 
 void lsShoot() { game->getLeftShip().shoot(); }
 void rsShoot() { game->getRightShip().shoot(); }
+
+void _switchShowFPS() { game->switchShowFPS(); }

@@ -25,4 +25,7 @@ void lsShoot();
 // Right ship
 void rsShoot();
 
+// --- META ---
+void _switchShowFPS();
+
 #endif

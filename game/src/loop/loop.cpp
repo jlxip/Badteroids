@@ -1,6 +1,7 @@
 #include <common.hpp>
 #include <Badteroids/Badteroids.hpp>
 #include "objects.hpp"
+#include <basics/Text/Text.hpp>
 
 extern GLFWwindow* window;
 
@@ -79,6 +80,11 @@ void mainLoop() {
 		// One second has passed, get the measure
 		fps = framesMeasured;
 		frameAcumTime = framesMeasured = 0;
+	}
+
+	if(game->getShowFPS()) {
+		std::string fpsstr = "FPS: " + std::to_string((size_t)fps);
+		Text(fpsstr, 0.5, -0.9, 0.9).draw();
 	}
 
 	// Shoot frame and manage events
