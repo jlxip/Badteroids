@@ -12,23 +12,20 @@ void Font::load(const std::string& path) {
 	width = image.width();
 	height = image.height();
 	size_t pixels = width * height;
-	data.rgba = new glm::vec4[pixels];
+	data = new uint8_t[pixels*4];
 
-	const uint8_t* bgr = image.data();
+	uint8_t* bgr = image.data();
 	// That's BGR, let's turn it into RGBA
 	for(size_t i=0; i<pixels; ++i) {
-		data.rgba[i] = glm::vec4(
-			bgr[i*3+2],
-			bgr[i*3+1],
-			bgr[i*3+0],
-			// Fortunately, it's black and white,
-			//   so alpha is any of them
-			bgr[i*3]);
+		data[i*4+0] = bgr[i*3+2]; // R
+		data[i*4+1] = bgr[i*3+1]; // G
+		data[i*4+2] = bgr[i*3+0]; // B
+		data[i*4+3] = bgr[i*3+0]; // A, any channel (it's b&w)
 	}
 
 	// That's enough of you
 	image.clear();
 
 	// Let's create a texture
-	texture = Textures::makeTexture(data.raw, width, height, true);
+	texture = Textures::makeTexture(data, width, height, true);
 }

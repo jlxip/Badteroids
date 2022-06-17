@@ -5,10 +5,7 @@
 
 class Font {
 private:
-	union {
-		glm::vec4* rgba;
-		uint8_t* raw;
-	} data;
+	uint8_t* data;
 
 	size_t width = 0;
 	size_t height = 0;
@@ -19,6 +16,8 @@ public:
 	void load(const std::string& path);
 
 	inline TexID getTexture() const { return texture; }
+	inline size_t getWidth() const { return width; }
+	inline size_t getHeight() const { return height; }
 };
 
 #endif

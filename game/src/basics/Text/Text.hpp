@@ -6,15 +6,20 @@
 #include <string>
 
 class Text {
+private:
+	std::string str;
+	float scale, x, y;
+
 public:
 	struct Fonts {
-		enum { HACK, N_FONTS };
-
 		static void upload();
 	};
 
-private:
-	Text(const std::string& str, size_t font=Fonts::HACK);
+	Text(const std::string& str, float scale, float x, float y)
+		: str(str), scale(scale), x(x), y(y)
+	{}
+
+	void draw();
 };
 
 #endif

@@ -9,8 +9,8 @@ extern Badteroids* game;
 //   this does further preparations before starting the main loop.
 void preparations() {
 	// Upload all models to GPU
-	Text::Fonts::upload();
 	BasicModels::Square::upload();
+	Text::Fonts::upload();
 	ShipModels::Dummy::upload();
 	Background::BGDraw::upload();
 	Laser::upload();
@@ -20,6 +20,10 @@ void preparations() {
 	glClearColor(0.0, 0.0, 0.0, 1.0);
 	glEnable(GL_MULTISAMPLE); // AA
 	glfwSwapInterval(1); // VSync
+
+	// Alpha channel for text
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	game = new Badteroids;
 	glfwSetTime(0); // Here we go, physics
