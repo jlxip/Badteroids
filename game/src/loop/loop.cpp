@@ -14,6 +14,11 @@ double lastTick = 0;
 bool leftPlaying = true;
 bool rightPlaying = true;
 
+// FPS measure
+size_t framesMeasured = 0;
+double frameAcumTime = 0;
+float fps = 0;
+
 void mainLoop() {
 	// First, take the time
 	double t = glfwGetTime();
@@ -66,6 +71,15 @@ void mainLoop() {
 	// Draw regular drawables
 	for(auto& x : Objects::drawables)
 		x.draw();
+
+	// FPS
+	frameAcumTime += dt;
+	++framesMeasured;
+	if(frameAcumTime >= 1) {
+		// One second has passed, get the measure
+		fps = framesMeasured;
+		frameAcumTime = framesMeasured = 0;
+	}
 
 	// Shoot frame and manage events
 	glfwSwapBuffers(window);
