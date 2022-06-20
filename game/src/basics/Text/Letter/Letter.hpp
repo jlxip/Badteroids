@@ -5,14 +5,17 @@
 #include "../Font/Font.hpp"
 
 class Letter : public Drawable {
-private:
-	static constexpr float kerning = 1;
-
 public:
 	Letter() = default;
 	Letter(float x, float y, float sz);
 
-	void setVars(float scale, float x, float y, size_t idx);
+	void setVars(float scalex, float scaley, float x, float y);
+	inline void setGreen(bool v) {
+		if(v)
+			this->VBO_c = VBOs::requestGreenVBO(4);
+		else
+			this->VBO_c = NULL_VBO;
+	}
 };
 
 #endif

@@ -5,7 +5,7 @@
 
 // Font
 Font font;
-static const char pathHack[] = "assets/fonts/Hack.bmp";
+static const char pathMMD[] = "assets/fonts/MajorMonoDisplay.bmp";
 static const size_t symbolsPerRow = 16;
 static const float fontSize = 64;
 
@@ -24,13 +24,25 @@ static inline glm::vec2 pos2coords(size_t pos) {
 }
 
 void Text::Fonts::upload() {
-	font.load(pathHack);
+	font.load(pathMMD);
 	float delta = fontSize / font.getWidth();
 
 	for(char i=' '; i<='~'; ++i) {
 		auto coords = pos2coords(i - ' ');
 		letters[i] = {coords.x, coords.y, delta};
 	}
+
+	// Dirty hack
+	auto aux = pos2coords(139);
+	letters['{'] = {aux.x, aux.y, delta};
+	aux = pos2coords(155);
+	letters['}'] = {aux.x, aux.y, delta};
+}
+
+void Text::xcenter() {
+	float endx = kerning * (str.size()-1) * scalex;
+	float xwide = endx;
+	x = -xwide/2;
 }
 
 void Text::draw() {
@@ -42,7 +54,8 @@ void Text::draw() {
 			exit(1001);
 		}
 
-		letters[c].setVars(scale, x, y, i);
+		letters[c].setVars(scalex, scaley, x + kerning*i*scalex, y);
+		letters[c].setGreen(doGreen);
 		letters[c].draw();
 	}
 }

@@ -20,9 +20,9 @@ Letter::Letter(float x, float y, float sz) {
 	this->mode = BasicModels::Square::mode;
 }
 
-void Letter::setVars(float scale, float x, float y, size_t idx) {
-	this->scalex = scale / ARX;
-	this->scaley = scale / ARY;
-	this->x = x + kerning * idx * this->scalex;
+void Letter::setVars(float scalex, float scaley, float x, float y) {
+	this->scalex = scalex;
+	this->scaley = scaley;
+	this->x = x;
 	this->y = y;
 }

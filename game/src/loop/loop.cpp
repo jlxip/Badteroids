@@ -11,10 +11,6 @@ Badteroids* game = nullptr;
 // For physics
 double lastTick = 0;
 
-// Very temporal variables for demonstration purposes
-bool leftPlaying = true;
-bool rightPlaying = true;
-
 // FPS measure
 size_t framesMeasured = 0;
 double frameAcumTime = 0;
@@ -32,26 +28,28 @@ void mainLoop() {
 	// - Game starts here -
 
 	// Background (a bit different than other objects)
-	auto& bgdraw = game->getBackground().getDraw();
-	bgdraw.textick(dt);
-	bgdraw.draw();
+	game->getBackground().getDraw().draw();
+	if(game->isInMenu())
+		game->getMenu().draw();
+	else
+		game->getBackground().getDraw().textick(dt);
 
 	// Left ship
-	if(leftPlaying) {
+	if(game->getShowLeft()) {
 		Ship& lship = game->getLeftShip();
 		lship.getModel().tick(dt);
 		if(!lship.checkBounds())
-			leftPlaying = false;
+			game->setShowLeft(false); // Temporal way of dying
 		else
 			lship.getModel().draw();
 	}
 
 	// Right ship
-	if(rightPlaying) {
+	if(game->getShowRight()) {
 		Ship& rship = game->getRightShip();
 		rship.getModel().tick(dt);
 		if(!rship.checkBounds())
-			rightPlaying = false;
+			game->setShowRight(false);
 		else
 			rship.getModel().draw();
 	}

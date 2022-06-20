@@ -26,6 +26,12 @@ void lsShoot();
 void rsShoot();
 
 // --- META ---
+void _menuUp();
+void _menuDown();
+void _menuLeft();
+void _menuRight();
+void _menuEnter();
+
 void _switchShowFPS();
 
 #endif

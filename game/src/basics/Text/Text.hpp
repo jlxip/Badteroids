@@ -4,21 +4,35 @@
 // Gotta draw some text
 
 #include <string>
+#include <common.hpp>
 
 class Text {
 private:
 	std::string str;
-	float scale, x, y;
+	float xorig, yorig; // In case of multiple center() calls
+	float scalex, scaley, x, y;
+
+	bool doGreen = false;
+
+	static constexpr float kerning = 1;
 
 public:
 	struct Fonts {
 		static void upload();
 	};
 
-	Text(const std::string& str, float scale, float x, float y)
-		: str(str), scale(scale), x(x), y(y)
-	{}
+	Text() = default;
 
+	Text(const std::string& str, float scale, float x, float y)
+		: str(str), xorig(x), yorig(y), x(x), y(y)
+	{
+		scalex = scale / ARX;
+		scaley = scale / ARY;
+	}
+
+	inline std::string& getStr() { return str; }
+	void xcenter();
+	inline void setGreen(bool v) { doGreen = v; }
 	void draw();
 };
 

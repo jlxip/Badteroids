@@ -9,9 +9,12 @@ Badteroids::Badteroids() {
 	background.generate(width, height);
 	background.upload();
 
-	// Object creation
-	Objects::idrawables.alloc(Bar());
-
 	// Key presses
 	registerEvents();
+}
+
+void Badteroids::startGame() {
+	inMenu = false;
+	showLeft = showRight = true;
+	Objects::idrawables.alloc(Bar());
 }
