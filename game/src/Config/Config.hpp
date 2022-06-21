@@ -8,12 +8,11 @@ private:
 	static constexpr const char* configFile = "config.dat";
 
 	struct {
-		bool vsync;
-		size_t msaaxn;
-		bool fps;
+		bool vsync = true;
+		size_t msaaxn = 4;
+		bool fps = false;
 	} data;
 
-	void setDefaults();
 	void refresh();
 
 public:

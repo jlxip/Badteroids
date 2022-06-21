@@ -33,6 +33,7 @@ protected:
 	VBOid VBO_t = NULL_VBO;
 
 public:
+	inline void resetxy() { x = y = 0; }
 	inline float getx() const { return x; }
 	inline float gety() const { return y; }
 

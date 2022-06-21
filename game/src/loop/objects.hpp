@@ -56,6 +56,10 @@ namespace Objects {
 		inline iterator begin() { return objs; }
 		inline iterator end() { return &objs[last + 1]; } // Not size!
 		inline void free(iterator it) { _free(it - objs); }
+		inline void clear() {
+			while(begin() != end())
+				free(begin());
+		}
 	};
 
 	extern Array<Drawable> drawables;

@@ -24,7 +24,9 @@ private:
 	bool showRight = false;
 
 	bool inMenu = true;
+	bool playing = false;
 	bool showFPS = false;
+	bool paused = false;
 
 public:
 	Badteroids();
@@ -32,6 +34,7 @@ public:
 
 	void registerEvents();
 	void startGame();
+	void leave();
 	void exit();
 
 	inline Background& getBackground() { return background; }
@@ -46,8 +49,20 @@ public:
 	inline Menu& getMenu() { return menu; }
 
 	inline bool isInMenu() const { return inMenu; }
+	inline bool isPlaying() const { return playing; }
 	inline bool getShowFPS() const { return showFPS; }
 	inline void setShowFPS(bool v) { showFPS = v; }
+
+	inline bool isPaused() const { return paused; }
+	inline void switchPause() {
+		paused = !paused;
+		if(paused) {
+			menu.changeState(Menu::State::PAUSE);
+			inMenu = true;
+		} else {
+			inMenu = false;
+		}
+	}
 };
 
 #endif

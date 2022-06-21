@@ -4,6 +4,8 @@
 Badteroids es un juego competitivo en 2D para Linux. Tras un enfrentamiento entre dos naciones de Andrómeda, la Federación Galáctica y la Ciudadela, la segunda se propone destruir la galaxia, y la primera deberá de impedirlo, cada una en un aeronave de su Estado, lado a lado.
 *** /Background/
 Badteroids se propone como el juego a desarrollar para la asignatura Programación Lúdica de la carrera de Ingeniería Informática de la UGR. Por la imposibilidad de dedicarle mucho tiempo, se intentarán mantener unos objetivos lo más modestos posibles pero llevándolos bien a cabo.
+
+Además, escrito en C++ y OpenGL, usando metodología de diseño orientado a datos, Badteroids es una /oda al bajo nivel/, y esto se puede apreciar en todo momento en el juego.
 *** Descripción
 El punto del juego es competir localmente. Por esto, la idea más importante, y la que se tendrá en mente para cada decisión, será que un videojuego de este tipo es más divertido cuando las acciones de un jugador repercuten sobre el otro, en lugar de considerar un sistema de puntuación aislado. Será, además, crítico evitar la monotonía interna (durante las partidas), así como la externa (de partida en partida).
 *** Características clave
@@ -66,8 +68,8 @@ Todo ser vivo, y esto incluye los seres de Andrómeda, necesita oxígeno para ma
 *** Fases de la carrera
 (Pendiente de definir)
 ** Interfaz y gráficos
-*** Menú
-Badteroids tiene dos pantallas de menú: la principal, y la de ajustes.
+*** Menús
+Badteroids tiene tres pantallas de menú: la principal, la de ajustes, y la de pausa.
 **** Menú principal
 Se muestra al iniciar el juego. Su fondo es el usual de Badteroids, salvo que es estático. Contiene el título del videojuego, y tres opciones:
 - /PLAY/, para comenzar una nueva partida.
@@ -81,6 +83,11 @@ Al entrar en /SETTINGS/ dentro del menú principal, aparecen opciones de ajustes
 - /MSAA/, selecciona el nivel de Multi-Sample Anti-Aliasing a usar. Los valores posibles son: 0, 2, 4, 8, 16, y 32. Por defecto, se usa MSAAx16.
 - /FPS off/on/, permite elegir entre mostrar los FPS en la esquina superior izquierda de la pantalla u ocultarlos. Por defecto, no se muestran.
 
+**** Menú de pausa
+Durante una partida, pulsar cualquiera de las teclas CTRL pausa el juego. Se permite de esta manera para que ambos jugadores puedan pausar en todo momento. En este menú, bajo el rótulo /PAUSE/, se muestran dos opciones:
+- /RESUME/, para continuar el juego. Pulsar de nuevo CTRL tiene la misma acción. De seleccionarse esta opción, aparece una cuenta atrás de 3 segundos, y se reanuda la partida.
+- /EXIT/, para abandonar la partida y volver al menú principal.
+
 *** El fondo
 En la partida, en todo momento hay un fondo estelado, cargado de una textura generada aleatoriamente en el momento. Se genera proceduramente, lo que no limita la resolución a la que se debe jugar.
 
@@ -90,6 +97,9 @@ Además, el fondo está en todo momento en movimiento para dar la sensación de 
 ** Mercado
 Badteroids está bajo la licencia de /izquierdos de autor/ GNU General Public License v3, y su distribución se llevará a cabo en este mismo repositorio de GitHub de forma gratuita, sin modo oficial de pagar por él.
 ** Historial de cambios
+*** Versión 0.6
+- En "Conceptos -> Background", párrafo sobre "oda al bajo nivel".
+- En "Interfaz y gráficos -> Menús", "Menú de pausa".
 *** Versión 0.5
 - En "Interfaz y gráficos", sección sobre los menús.
 *** Versión 0.4

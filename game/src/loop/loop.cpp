@@ -31,15 +31,16 @@ void mainLoop() {
 
 	// Background (a bit different than other objects)
 	game->getBackground().getDraw().draw();
-	if(game->isInMenu())
+	if(game->isInMenu() && !game->isPaused())
 		game->getMenu().draw();
-	else
+	else if(!game->isInMenu())
 		game->getBackground().getDraw().textick(dt);
 
 	// Left ship
 	if(game->getShowLeft()) {
 		Ship& lship = game->getLeftShip();
-		lship.getModel().tick(dt);
+		if(!game->isPaused())
+			lship.getModel().tick(dt);
 		if(!lship.checkBounds())
 			game->setShowLeft(false); // Temporal way of dying
 		else
@@ -49,7 +50,8 @@ void mainLoop() {
 	// Right ship
 	if(game->getShowRight()) {
 		Ship& rship = game->getRightShip();
-		rship.getModel().tick(dt);
+		if(!game->isPaused())
+			rship.getModel().tick(dt);
 		if(!rship.checkBounds())
 			game->setShowRight(false);
 		else
@@ -59,7 +61,8 @@ void mainLoop() {
 	// Tick and draw inertials drawables, free if they've gone away
 	auto iti = Objects::idrawables.begin();
 	while(iti != Objects::idrawables.end()) {
-		iti->tick(dt);
+		if(!game->isPaused())
+			iti->tick(dt);
 		iti->draw();
 		if(iti->outOfBounds())
 			Objects::idrawables.free(iti);
@@ -72,6 +75,10 @@ void mainLoop() {
 	// Draw regular drawables
 	for(auto& x : Objects::drawables)
 		x.draw();
+
+	// Pause menu, draw above all
+	if(game->isPaused())
+		game->getMenu().draw();
 
 	// FPS
 	frameAcumTime += dt;

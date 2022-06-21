@@ -20,8 +20,20 @@ void Badteroids::init() {
 
 void Badteroids::startGame() {
 	inMenu = false;
-	showLeft = showRight = true;
+	playing = showLeft = showRight = true;
 	Objects::idrawables.alloc(Bar());
+
+	// Reset ships
+	leftShip.reset();
+	rightShip.reset();
+}
+
+void Badteroids::leave() {
+	inMenu = true;
+	paused = false;
+	menu.changeState(Menu::State::MAIN);
+	playing = showLeft = showRight = false;
+	Objects::idrawables.clear();
 }
 
 void Badteroids::exit() {

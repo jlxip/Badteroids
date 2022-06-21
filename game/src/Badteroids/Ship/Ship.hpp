@@ -31,6 +31,7 @@ private:
 
 public:
 	Ship(bool iam_);
+	void reset();
 
 	inline Drawable& getModel() { return model; }
 

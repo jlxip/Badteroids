@@ -4,18 +4,12 @@
 
 extern Badteroids* game;
 
-void Config::setDefaults() {
-	data.vsync = true;
-	data.msaaxn = 4;
-	data.fps = false;
-}
-
 void Config::load(bool doRefresh) {
 	// File exists?
 	std::ifstream file;
 	file.open(configFile);
 	if(!file.good()) {
-		setDefaults();
+		// Save the defaults
 		save(doRefresh);
 		return;
 	}

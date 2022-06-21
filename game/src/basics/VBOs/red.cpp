@@ -1,6 +1,3 @@
-#ifndef GREEN_HPP
-#define GREEN_HPP
-
 #include "VBOs.hpp"
 
 // Go read "green.cpp" first
@@ -32,5 +29,3 @@ VBOid VBOs::requestRedVBO(size_t vertices) {
 
 	return redVBO;
 }
-
-#endif

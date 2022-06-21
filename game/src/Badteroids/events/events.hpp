@@ -32,4 +32,6 @@ void _menuLeft();
 void _menuRight();
 void _menuEnter();
 
+void _pause();
+
 #endif
