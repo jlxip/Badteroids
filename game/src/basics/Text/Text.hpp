@@ -12,7 +12,7 @@ private:
 	float xorig, yorig; // In case of multiple center() calls
 	float scalex, scaley, x, y;
 
-	bool doGreen = false;
+	size_t color = 0;
 
 	static constexpr float kerning = 1;
 
@@ -32,7 +32,8 @@ public:
 
 	inline std::string& getStr() { return str; }
 	void xcenter();
-	inline void setGreen(bool v) { doGreen = v; }
+	inline void setGreen(bool v) { color = v ? 1 : 0; }
+	inline void setRed(bool v) { color = v ? 2 : 0; }
 	void draw();
 };
 

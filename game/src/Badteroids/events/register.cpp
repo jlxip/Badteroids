@@ -27,6 +27,4 @@ void Badteroids::registerEvents() {
 	Keyboard::setKeyPress(GLFW_KEY_LEFT, _menuLeft);
 	Keyboard::setKeyPress(GLFW_KEY_RIGHT, _menuRight);
 	Keyboard::setKeyPress(GLFW_KEY_ENTER, _menuEnter);
-
-	Keyboard::setKeyPress(GLFW_KEY_F12, _switchShowFPS);
 }

@@ -13,8 +13,17 @@ Badteroids::Badteroids() {
 	registerEvents();
 }
 
+void Badteroids::init() {
+	// Initialize menu
+	menu.init();
+}
+
 void Badteroids::startGame() {
 	inMenu = false;
 	showLeft = showRight = true;
 	Objects::idrawables.alloc(Bar());
+}
+
+void Badteroids::exit() {
+	glfwSetWindowShouldClose(window, true);
 }

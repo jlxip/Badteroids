@@ -2,8 +2,10 @@
 #include <basics/models/Square/Square.hpp>
 #include <basics/Text/Text.hpp>
 #include <Badteroids/Bar/Bar.hpp>
+#include <Config/Config.hpp>
 
 extern Badteroids* game;
+extern Config globalConfig;
 
 // After the window has been created and OpenGL context set,
 //   this does further preparations before starting the main loop.
@@ -13,18 +15,18 @@ void preparations() {
 	Text::Fonts::upload();
 	ShipModels::Dummy::upload();
 	Background::BGDraw::upload();
-	Laser::upload();
 	Bar::upload();
 
 	// Game initialization
 	glClearColor(0.0, 0.0, 0.0, 1.0);
 	glEnable(GL_MULTISAMPLE); // AA
-	glfwSwapInterval(1); // VSync
 
 	// Alpha channel for text
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	game = new Badteroids;
+	game->init(); // *game is set, finish initialization
+	globalConfig.load();
 	glfwSetTime(0); // Here we go, physics
 }

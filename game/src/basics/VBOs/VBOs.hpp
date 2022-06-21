@@ -30,6 +30,7 @@ namespace VBOs {
 
 	// --- AXILIARY ---
 	VBOid requestGreenVBO(size_t vertices);
+	VBOid requestRedVBO(size_t vertices);
 };
 
 #endif

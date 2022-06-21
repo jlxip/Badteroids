@@ -3,14 +3,14 @@
 
 extern Badteroids* game;
 
-MainMenu::MainMenu() {
+void MainMenu::init() {
 	tTitle = {"bAdteRoids", .7, 0, +.6};
 	tTitle.xcenter();
 
 	tPlay = {"play", .7, 0, +.2};
 	tPlay.xcenter();
 
-	tConfig = {"configuration", .7, 0, -.1};
+	tConfig = {"settings", .7, 0, -.1};
 	tConfig.xcenter();
 
 	tExit = {"exit", .7, 0, -.4};
@@ -22,12 +22,13 @@ MainMenu::MainMenu() {
 void MainMenu::ok() {
 	switch(selected) {
 	case Selected::PLAY:
-		std::cout << "PLAY" << std::endl;
 		game->startGame();
 		break;
 	case Selected::CONFIG:
+		game->getMenu().changeState(Menu::State::CONFIG);
 		break;
 	case Selected::EXIT:
+		game->exit();
 		break;
 	}
 }

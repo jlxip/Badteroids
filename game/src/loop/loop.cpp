@@ -1,5 +1,6 @@
 #include <common.hpp>
 #include <Badteroids/Badteroids.hpp>
+#include <Config/Config.hpp>
 #include "objects.hpp"
 #include <basics/Text/Text.hpp>
 
@@ -7,6 +8,7 @@ extern GLFWwindow* window;
 
 // Initialization is postponed, done in <preparations.cpp>
 Badteroids* game = nullptr;
+Config globalConfig;
 
 // For physics
 double lastTick = 0;
@@ -81,7 +83,7 @@ void mainLoop() {
 	}
 
 	if(game->getShowFPS()) {
-		std::string fpsstr = "FPS: " + std::to_string((size_t)fps);
+		std::string fpsstr = "fps: " + std::to_string((size_t)fps);
 		Text(fpsstr, 0.5, -0.9, 0.9).draw();
 	}
 

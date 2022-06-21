@@ -28,8 +28,11 @@ private:
 
 public:
 	Badteroids();
+	void init(); // Extra initialization after *game is set
+
 	void registerEvents();
 	void startGame();
+	void exit();
 
 	inline Background& getBackground() { return background; }
 	inline Ship& getLeftShip() { return leftShip; }
@@ -44,7 +47,7 @@ public:
 
 	inline bool isInMenu() const { return inMenu; }
 	inline bool getShowFPS() const { return showFPS; }
-	inline void switchShowFPS() { showFPS = !showFPS; }
+	inline void setShowFPS(bool v) { showFPS = v; }
 };
 
 #endif

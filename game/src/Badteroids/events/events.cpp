@@ -20,5 +20,3 @@ void _menuDown() { if(game->isInMenu()) game->getMenu().move(1); }
 void _menuLeft() { if(game->isInMenu()) game->getMenu().move(2); }
 void _menuRight() { if(game->isInMenu()) game->getMenu().move(3); }
 void _menuEnter() { if(game->isInMenu()) game->getMenu().move(99); }
-
-void _switchShowFPS() { game->switchShowFPS(); }

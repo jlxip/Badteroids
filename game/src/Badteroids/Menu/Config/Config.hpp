@@ -1,19 +1,23 @@
-#ifndef MAIN_HPP
-#define MAIN_HPP
+#ifndef CONFIG_HPP
+#define CONFIG_HPP
 
 #include <basics/Text/Text.hpp>
 
-class MainMenu {
+class ConfigMenu {
 private:
 	struct Selected {
 		enum {
-			PLAY,
-			CONFIG,
-			EXIT,
+			VSYNC,
+			AA,
+			FPS,
+			BACK,
+			N_SELECTED,
 		};
 	};
 
-	Text tTitle, tPlay, tConfig, tExit;
+	bool restartRequired = false;
+
+	Text tTitle, tVsync, tAA, tFPS, tBack, tRestart;
 
 	size_t selected;
 	Text& selectedText();

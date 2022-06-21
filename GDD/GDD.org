@@ -66,6 +66,21 @@ Todo ser vivo, y esto incluye los seres de Andrómeda, necesita oxígeno para ma
 *** Fases de la carrera
 (Pendiente de definir)
 ** Interfaz y gráficos
+*** Menú
+Badteroids tiene dos pantallas de menú: la principal, y la de ajustes.
+**** Menú principal
+Se muestra al iniciar el juego. Su fondo es el usual de Badteroids, salvo que es estático. Contiene el título del videojuego, y tres opciones:
+- /PLAY/, para comenzar una nueva partida.
+- /SETTINGS/, abre el menú de ajustes.
+- /EXIT/, para salir.
+
+**** Menú de ajustes
+Al entrar en /SETTINGS/ dentro del menú principal, aparecen opciones de ajustes del juego, bajo el rótulo /SETTINGS/, y sobre un botón /BACK/ para volver. Los cambios deberán guardarse automáticamente al modificarse, y permanecer al reiniciar el juego.
+
+- /VSync/Flex mode/, selecciona entre dos modos de dibujado de frames: VSync, es decir, una vez entre refresco de pantallas, lo que evita el tearing, y /Flex mode/, es decir, sin límite de FPS, para poder medir los valores que alcanza el juego. Por defecto, se usa VSync.
+- /MSAA/, selecciona el nivel de Multi-Sample Anti-Aliasing a usar. Los valores posibles son: 0, 2, 4, 8, 16, y 32. Por defecto, se usa MSAAx16.
+- /FPS off/on/, permite elegir entre mostrar los FPS en la esquina superior izquierda de la pantalla u ocultarlos. Por defecto, no se muestran.
+
 *** El fondo
 En la partida, en todo momento hay un fondo estelado, cargado de una textura generada aleatoriamente en el momento. Se genera proceduramente, lo que no limita la resolución a la que se debe jugar.
 

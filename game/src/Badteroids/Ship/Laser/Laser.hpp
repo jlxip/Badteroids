@@ -15,7 +15,6 @@ public:
 	static constexpr float thevx = 0;
 	static constexpr float thevy = 2;
 
-	static void upload();
 	Laser(float x, float y);
 };
 

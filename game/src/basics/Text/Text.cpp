@@ -55,7 +55,7 @@ void Text::draw() {
 		}
 
 		letters[c].setVars(scalex, scaley, x + kerning*i*scalex, y);
-		letters[c].setGreen(doGreen);
+		letters[c].setColor(color);
 		letters[c].draw();
 	}
 }
