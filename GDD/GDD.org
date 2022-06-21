@@ -90,8 +90,10 @@ Además, el fondo está en todo momento en movimiento para dar la sensación de 
 ** Mercado
 Badteroids está bajo la licencia de /izquierdos de autor/ GNU General Public License v3, y su distribución se llevará a cabo en este mismo repositorio de GitHub de forma gratuita, sin modo oficial de pagar por él.
 ** Historial de cambios
+*** Versión 0.5
+- En "Interfaz y gráficos", sección sobre los menús.
 *** Versión 0.4
-- En _Gameplay y mecánicas_, especificación del arma láser.
+- En "Gameplay y mecánicas", especificación del arma láser.
 *** Versión 0.3
 - Comenzado "Interfaz y gráficos" con "El fondo"
 *** Versión 0.2.1
