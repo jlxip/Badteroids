@@ -1,16 +1,14 @@
-#ifndef BAR_HPP
-#define BAR_HPP
+#ifndef BORDER_HPP
+#define BORDER_HPP
 
 #include <basics/Drawable/Drawable.hpp>
 
-class Bar : public Drawable {
+class Border : public Drawable {
 private:
-	static constexpr float barScaley = 0.001;
+	static constexpr float borderScale = 0.001;
 
 public:
-	static void upload();
-	Bar();
-
+	Border(bool horizontal, bool first);
 	inline bool collisioned(Drawable* other) override {
 		IGNORE(other);
 		return false;

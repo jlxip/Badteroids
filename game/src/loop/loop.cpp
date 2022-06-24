@@ -1,4 +1,4 @@
-#include <common.hpp>
+#include "loop.hpp"
 #include <Badteroids/Badteroids.hpp>
 #include <Config/Config.hpp>
 #include "objects.hpp"
@@ -11,17 +11,17 @@ Badteroids* game = nullptr;
 Config globalConfig;
 
 // For physics
-double lastTick = 0;
+Time lastTick = 0;
 
 // FPS measure
 size_t framesMeasured = 0;
-double frameAcumTime = 0;
+Time frameAcumTime = 0;
 float fps = 0;
 
-void mainLoop() {
+void Loop::mainLoop() {
 	// First, take the time
-	double t = glfwGetTime();
-	double dt = t - lastTick;
+	Time t = glfwGetTime();
+	Time dt = t - lastTick;
 
 	// Reset everything
 	glClear(GL_COLOR_BUFFER_BIT);
@@ -36,39 +36,12 @@ void mainLoop() {
 	else if(!game->isInMenu())
 		game->getBackground().getDraw().textick(dt);
 
-	// Left ship
-	if(game->getShowLeft()) {
-		Ship& lship = game->getLeftShip();
-		if(!game->isPaused())
-			lship.getModel().tick(dt);
-		if(!lship.checkBounds())
-			game->setShowLeft(false); // Temporal way of dying
-		else
-			lship.getModel().draw();
-	}
+	Loop::manage_idrs(dt);
+	Loop::manage_cidrs(dt);
 
-	// Right ship
-	if(game->getShowRight()) {
-		Ship& rship = game->getRightShip();
-		if(!game->isPaused())
-			rship.getModel().tick(dt);
-		if(!rship.checkBounds())
-			game->setShowRight(false);
-		else
-			rship.getModel().draw();
-	}
-
-	// Tick and draw inertials drawables, free if they've gone away
-	auto iti = Objects::idrawables.begin();
-	while(iti != Objects::idrawables.end()) {
-		if(!game->isPaused())
-			iti->tick(dt);
-		iti->draw();
-		if(iti->outOfBounds())
-			Objects::idrawables.free(iti);
-		else
-			++iti;
-	}
+	// Tick more stuff
+	if(game->isPlaying() && !game->isPaused())
+		game->tick(t);
 
 	lastTick = t;
 

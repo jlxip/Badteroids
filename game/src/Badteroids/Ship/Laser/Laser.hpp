@@ -16,6 +16,8 @@ public:
 	static constexpr float thevy = 2;
 
 	Laser(float x, float y);
+
+	bool collisioned(Drawable* other) override;
 };
 
 #endif

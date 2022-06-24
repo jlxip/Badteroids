@@ -3,67 +3,85 @@
 
 #include <memory>
 #include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
 
 #include <basics/Drawable/Drawable.hpp>
 
-typedef size_t ObjID;
+typedef size_t ObjID; // Public ObjID (constant)
 
 // Here are defined all containers for all objects that will commonly be iterated
 // Custom std::vector implementation is given
 
 namespace Objects {
+	extern ObjID monotonic;
+
 	template<typename T> class Array {
 	private:
-		T* objs = nullptr;
-		size_t last = ~0;
-		size_t size = 0;
-		ObjID* lookup = nullptr; // Constant ObjID -> swappable ObjID
+		typedef size_t IObjID; // Internal ObjID (swappable)
+
+		std::vector<T> objs; // Index is IObjID
+		std::unordered_map<ObjID, IObjID> lookup;
+		std::unordered_set<ObjID> marked;
 
 	public:
 		ObjID alloc(T&& obj) {
-			if(!size) {
-				objs = (T*)malloc(2*sizeof(T));
-				lookup = (ObjID*)malloc(2*sizeof(ObjID));
-				size = 2;
-			}
-
-			++last;
-			if(last >= size) {
-				objs = (T*)realloc(objs, sizeof(T)*2*size);
-				lookup = (ObjID*)realloc(lookup, sizeof(ObjID)*2*size);
-				size *= 2;
-			}
-
-			objs[last] = obj;
-			lookup[last] = last;
-			return last;
+			objs.push_back(obj);
+			ObjID ret = monotonic++;
+			lookup[ret] = objs.size()-1;
+			return ret;
 		}
 
 	private:
-		// Beware: this uses internal ObjIDs (non-constant)
-		inline void _free(ObjID id) {
-			std::swap(objs[id], objs[last]);
-			lookup[last] = id;
-			--last;
+		// Internal -> Public
+		inline ObjID _convert(IObjID internal) {
+			for(auto const& x : lookup)
+				if(x.second == internal)
+					return x.first;
+			return ~0;
+		}
+
+		inline void _free(IObjID id) {
+			lookup.erase(_convert(id));
+
+			if(id != objs.size()-1) {
+				std::swap(objs[id], objs[objs.size()-1]);
+				lookup[_convert(objs.size()-1)] = id;
+			}
+
+			objs.pop_back();
 		}
 
 	public:
 		inline T& get(ObjID id) { return objs[lookup[id]]; }
+		inline T& operator[](ObjID id) { return get(id); }
 
 
 		// Very simple iterator
-		typedef T* iterator;
-		inline iterator begin() { return objs; }
-		inline iterator end() { return &objs[last + 1]; } // Not size!
-		inline void free(iterator it) { _free(it - objs); }
+		typedef typename std::vector<T>::iterator iterator;
+		inline iterator begin() { return objs.begin(); }
+		inline iterator end() { return objs.end(); }
+		inline ObjID getID(iterator it) { return _convert(it - begin()); }
+		inline void free(ObjID id) { _free(lookup[id]); }
+
+		inline void markFree(iterator it) { marked.insert(it - begin()); }
+		inline void flushFree() {
+			for(auto const& x : marked)
+				_free(x);
+			marked.clear();
+		}
+
+		inline bool freed(ObjID id) { return lookup.find(id) == lookup.end(); }
+
 		inline void clear() {
-			while(begin() != end())
-				free(begin());
+			objs.clear();
+			lookup.clear();
 		}
 	};
 
 	extern Array<Drawable> drawables;
 	extern Array<Drawable> idrawables;
+	extern Array<Drawable*> cidrawablesp;
 };
 
 #endif

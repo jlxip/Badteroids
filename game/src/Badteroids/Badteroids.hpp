@@ -4,6 +4,8 @@
 #include "Background/Background.hpp"
 #include "Menu/Menu.hpp"
 #include "Ship/Ship.hpp"
+#include "Asteroids/Asteroids.hpp"
+#include "RNG/RNG.hpp"
 
 // Welcome.
 // All objects in Badteroids live in a [-1, +1]x[-1, +1] plane
@@ -19,9 +21,8 @@ private:
 
 	Ship leftShip = Ship(LEFT_SHIP);
 	Ship rightShip = Ship(RIGHT_SHIP);
-
-	bool showLeft = false;
-	bool showRight = false;
+	Asteroids leftAst = Asteroids(-1, RNG::Area::LEFT_ASTEROIDS);
+	Asteroids rightAst = Asteroids(0, RNG::Area::RIGHT_ASTEROIDS);
 
 	bool inMenu = true;
 	bool playing = false;
@@ -37,14 +38,20 @@ public:
 	void leave();
 	void exit();
 
+	inline void tick(Time t) {
+		leftAst.tick(t);
+		rightAst.tick(t);
+	}
+
 	inline Background& getBackground() { return background; }
 	inline Ship& getLeftShip() { return leftShip; }
 	inline Ship& getRightShip() { return rightShip; }
 
-	inline bool getShowLeft() const { return showLeft; }
-	inline void setShowLeft(bool v) { showLeft = v;}
-	inline bool getShowRight() const { return showRight; }
-	inline void setShowRight(bool v) { showRight = v; }
+	inline Asteroids& getLeftAst() { return leftAst; }
+	inline Asteroids& getRightAst() { return rightAst; }
+
+	inline bool leftAlive() { return leftShip.alive(); }
+	inline bool rightAlive() { return rightShip.alive(); }
 
 	inline Menu& getMenu() { return menu; }
 

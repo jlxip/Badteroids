@@ -3,16 +3,18 @@
 
 Ship::Ship(bool iam_) {
 	this->iam = iam_;
+}
 
+void Ship::init() {
 	// For now, a dummy ship
-	ShipModels::Dummy model;
+	auto* model = new ShipModels::Dummy;
 
-	model.mulScalex(shipScalex);
-	model.mulScaley(shipScaley);
+	model->mulScalex(shipScalex);
+	model->mulScaley(shipScaley);
 
 	// It could go in idrawables, but there would be no strict control over
 	//   screen limits. It's different than other idrawables.
-	this->model = std::move(model);
+	obj = Objects::cidrawablesp.alloc(dynamic_cast<Drawable*>(model));
 
 	// Let's precompute some values
 	if(iam == LEFT_SHIP) {
@@ -26,7 +28,11 @@ Ship::Ship(bool iam_) {
 }
 
 void Ship::reset() {
+	if(!alive())
+		init();
+
 	// Position
+	auto& model = getModel();
 	model.resetxy();
 	model.addx((iam == LEFT_SHIP) ? -0.5 : 0.5);
 
@@ -38,12 +44,4 @@ void Ship::reset() {
 
 	model.getInertia().vx = startvx;
 	model.getInertia().vy = startvy;
-}
-
-bool Ship::checkBounds() const {
-	if(this->model.getx() < this->minx || this->model.gety() < this->miny)
-		return false;
-	if(this->model.getx() > this->maxx || this->model.gety() > this->maxy)
-		return false;
-	return true;
 }

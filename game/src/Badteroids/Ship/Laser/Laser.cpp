@@ -1,5 +1,6 @@
 #include "Laser.hpp"
 #include <basics/models/Square/Square.hpp>
+#include <Badteroids/Asteroids/Asteroid/Asteroid.hpp>
 
 Laser::Laser(float x, float y) {
 	this->VBO_v = BasicModels::Square::VBO_v;
@@ -16,4 +17,10 @@ Laser::Laser(float x, float y) {
 
 	this->inertia.vx = Laser::thevx;
 	this->inertia.vy = Laser::thevy;
+}
+
+bool Laser::collisioned(Drawable* other) {
+	if(instanceof<Asteroid>(other))
+		return true;
+	return false;
 }

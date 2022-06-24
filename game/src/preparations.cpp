@@ -3,6 +3,8 @@
 #include <basics/Text/Text.hpp>
 #include <Badteroids/Bar/Bar.hpp>
 #include <Config/Config.hpp>
+#include <Badteroids/RNG/RNG.hpp>
+#include <ctime>
 
 extern Badteroids* game;
 extern Config globalConfig;
@@ -28,5 +30,6 @@ void preparations() {
 	game = new Badteroids;
 	game->init(); // *game is set, finish initialization
 	globalConfig.load();
+	RNG::init(time(NULL));
 	glfwSetTime(0); // Here we go, physics
 }

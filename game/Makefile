@@ -1,4 +1,5 @@
 RESULT := badteroids
+ZIPRESULT := release.zip
 
 SRCPATH := src
 OBJPATH := obj
@@ -12,7 +13,10 @@ endif
 
 CXXFLAGS_BASE := -std=c++11 -O2
 CXXFLAGS_WARN := -Wall -Wextra -Werror
-CXXFLAGS_OPTS := -fno-exceptions -fno-rtti
+CXXFLAGS_OPTS := -fno-exceptions
+ifeq ($(DEBUG),1)
+	CXXFLAGS_OPTS += -g
+endif
 
 ifeq ($(shell uname -s),Darwin)
 	CXXFLAGS_WARN := -Wno-deprecated-declarations
@@ -28,17 +32,27 @@ else
 	EXTRA_LINKER += -lGL -lGLU
 endif
 EXTRA_LINKER += -lglfw -lGLEW
+ifeq ($(DEBUG),1)
+	EXTRA_LINKER += -g
+endif
 LINKER_FLAGS := $(CXXFLAGS) $(EXTRA_LINKER)
 
 STRIP := strip
+ifeq ($(DEBUG),1)
+	STRIP := ls
+endif
 
 OBJS := $(shell cd src && find . -type f -iname '*.cpp' | sed 's/\.\///g' | sed 's/\.cpp/\.o/g' | xargs -I {} echo "$(OBJPATH)/"{})
 
-.PHONY: all run clean
+.PHONY: all run clean zip
 all: $(RESULT)
 
 run: all
 	./$(RESULT)
+
+zip: $(ZIPRESULT)
+$(ZIPRESULT): $(RESULT)
+	zip -r $@ $< assets/
 
 $(RESULT): $(OBJS)
 	@echo "Linking..."

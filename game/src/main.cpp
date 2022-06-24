@@ -1,8 +1,8 @@
 #include <events/events.hpp>
 #include <Config/Config.hpp>
+#include <loop/loop.hpp>
 
 void preparations();
-void mainLoop();
 
 extern Config globalConfig;
 GLFWwindow* window;
@@ -62,7 +62,7 @@ int main() {
 	// Go!
 	std::cout << "Starting main loop" << std::endl;
 	while(!glfwWindowShouldClose(window))
-		mainLoop();
+		Loop::mainLoop();
 
 	std::cout << "Thanks for playing!" << std::endl;
 	glfwDestroyWindow(window);

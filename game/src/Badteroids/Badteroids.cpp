@@ -1,5 +1,6 @@
 #include "Badteroids.hpp"
 #include "Bar/Bar.hpp"
+#include "Border/Border.hpp"
 
 extern GLFWwindow* window;
 
@@ -20,8 +21,13 @@ void Badteroids::init() {
 
 void Badteroids::startGame() {
 	inMenu = false;
-	playing = showLeft = showRight = true;
-	Objects::idrawables.alloc(Bar());
+	playing = true;
+
+	Objects::cidrawablesp.alloc(new Bar);
+	Objects::cidrawablesp.alloc(new Border(false, true)); // Left border
+	Objects::cidrawablesp.alloc(new Border(false, false)); // Right
+	Objects::cidrawablesp.alloc(new Border(true, true)); // Top
+	Objects::cidrawablesp.alloc(new Border(true, false)); // Bottom
 
 	// Reset ships
 	leftShip.reset();
@@ -30,10 +36,14 @@ void Badteroids::startGame() {
 
 void Badteroids::leave() {
 	inMenu = true;
-	paused = false;
+	paused = playing = false;
 	menu.changeState(Menu::State::MAIN);
-	playing = showLeft = showRight = false;
+
 	Objects::idrawables.clear();
+
+	for(auto x : Objects::cidrawablesp)
+		delete x;
+	Objects::cidrawablesp.clear();
 }
 
 void Badteroids::exit() {

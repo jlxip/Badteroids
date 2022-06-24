@@ -1,14 +1,19 @@
 #include "Drawable.hpp"
+#include <cmath>
 
 void Drawable::tick(float dt) {
 	x += inertia.vx * dt;
 	y += inertia.vy * dt;
+	r += inertia.w  * dt;
+	if(r >= 360)
+		r -= 360;
 }
 
 void Drawable::draw() const {
 	glLoadIdentity();
 	glTranslatef(x, y, 0.0);
 	glScalef(scalex, scaley, 1.0);
+	glRotatef(r, 0, 0, 1.0);
 
 	// Vertices
 	glEnableClientState(GL_VERTEX_ARRAY);
@@ -33,4 +38,18 @@ void Drawable::draw() const {
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 	glDisableClientState(GL_COLOR_ARRAY);
 	glDisableClientState(GL_VERTEX_ARRAY);
+}
+
+bool Drawable::outOfBounds() const {
+	if((x - scalex) > (1+OOB_MARGIN))
+		return true;
+	if((y - scaley) > (1+OOB_MARGIN))
+		return true;
+
+	if((x + scalex) < (-1-OOB_MARGIN))
+		return true;
+	if((y + scaley) < (-1-OOB_MARGIN))
+		return true;
+
+	return false;
 }

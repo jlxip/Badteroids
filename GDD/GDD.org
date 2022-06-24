@@ -85,7 +85,7 @@ Al entrar en /SETTINGS/ dentro del menú principal, aparecen opciones de ajustes
 
 **** Menú de pausa
 Durante una partida, pulsar cualquiera de las teclas CTRL pausa el juego. Se permite de esta manera para que ambos jugadores puedan pausar en todo momento. En este menú, bajo el rótulo /PAUSE/, se muestran dos opciones:
-- /RESUME/, para continuar el juego. Pulsar de nuevo CTRL tiene la misma acción. De seleccionarse esta opción, aparece una cuenta atrás de 3 segundos, y se reanuda la partida.
+- /RESUME/, para continuar el juego. Pulsar de nuevo CTRL tiene la misma acción. De seleccionarse esta opción, se reanuda la partida.
 - /EXIT/, para abandonar la partida y volver al menú principal.
 
 *** El fondo

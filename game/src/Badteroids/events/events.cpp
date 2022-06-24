@@ -3,45 +3,45 @@
 extern Badteroids* game;
 
 void lsLeft() {
-	if(game->getShowLeft() && !game->isPaused())
+	if(game->leftAlive() && !game->isPaused())
 		game->getLeftShip().moveLeft();
 }
 void lsRight() {
-	if(game->getShowLeft() && !game->isPaused())
+	if(game->leftAlive() && !game->isPaused())
 		game->getLeftShip().moveRight();
 }
 void lsUp() {
-	if(game->getShowLeft() && !game->isPaused())
+	if(game->leftAlive() && !game->isPaused())
 		game->getLeftShip().moveUp();
 }
 void lsDown() {
-	if(game->getShowLeft() && !game->isPaused())
+	if(game->leftAlive() && !game->isPaused())
 		game->getLeftShip().moveDown();
 }
 
 void rsLeft() {
-	if(game->getShowRight() && !game->isPaused())
+	if(game->rightAlive() && !game->isPaused())
 		game->getRightShip().moveLeft();
 }
 void rsRight() {
-	if(game->getShowRight() && !game->isPaused())
+	if(game->rightAlive() && !game->isPaused())
 		game->getRightShip().moveRight();
 }
 void rsUp() {
-	if(game->getShowRight() && !game->isPaused())
+	if(game->rightAlive() && !game->isPaused())
 		game->getRightShip().moveUp();
 }
 void rsDown() {
-	if(game->getShowRight() && !game->isPaused())
+	if(game->rightAlive() && !game->isPaused())
 		game->getRightShip().moveDown();
 }
 
 void lsShoot() {
-	if(game->getShowLeft() && !game->isPaused())
+	if(game->leftAlive() && !game->isPaused())
 		game->getLeftShip().shoot();
 }
 void rsShoot() {
-	if(game->getShowRight() && !game->isPaused())
+	if(game->rightAlive() && !game->isPaused())
 		game->getRightShip().shoot();
 }
 
