@@ -8,7 +8,6 @@ private:
 	static constexpr float barScaley = 0.001;
 
 public:
-	static void upload();
 	Bar();
 
 	inline bool collisioned(Drawable* other) override {

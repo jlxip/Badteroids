@@ -18,7 +18,8 @@ private:
 	public:
 		BG() {
 			this->VBO_v = BasicModels::Square::VBO_v;
-			this->VBO_c = VBOs::requestBlackVBO(BasicModels::Square::vsize);
+			this->VBO_c = VBOs::requestColor(VBOs::Color::BLACK,
+											 BasicModels::Square::vsize);
 			this->VBO_i = BasicModels::Square::VBO_i;
 			this->isize = BasicModels::Square::isize;
 			this->mode = BasicModels::Square::mode;

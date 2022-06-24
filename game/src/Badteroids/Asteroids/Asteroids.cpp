@@ -19,6 +19,15 @@ void Asteroids::tick(Time t) {
 void Asteroids::emmit() {
 	Asteroid* ast = new Asteroid;
 
+	// Type?
+	float typev = RNG::genf(rng, 0, 1);
+	size_t type = Asteroid::Type::REGULAR;
+	if(typev < probO)
+		type = Asteroid::Type::OXYGEN;
+	else if(typev < probH)
+		type = Asteroid::Type::HYDROGEN;
+	ast->setType(type);
+
 	// How many vertices?
 	ast->setVertices(RNG::geni(rng, 3, 7));
 

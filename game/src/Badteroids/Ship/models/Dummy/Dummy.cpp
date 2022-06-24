@@ -18,7 +18,7 @@ static VBOid globalVBO_i = NULL_VBO;
 
 void ShipModels::Dummy::upload() {
 	globalVBO_v = VBOs::makeVertices(vertices, global_vsize);
-	globalVBO_c = VBOs::requestGreenVBO(global_vsize);
+	globalVBO_c = VBOs::requestColor(VBOs::Color::GREEN, global_vsize);
 	globalVBO_i = VBOs::makeIndices(indices, global_isize);
 }
 

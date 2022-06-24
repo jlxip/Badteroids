@@ -4,11 +4,26 @@
 #include <basics/Drawable/Drawable.hpp>
 
 class Asteroid : public Drawable {
+public:
+	struct Type {
+		enum {
+			REGULAR,
+			HYDROGEN,
+			OXYGEN,
+		};
+	};
+
 private:
 	size_t n = 0;
+	size_t type = Type::REGULAR;
 
 public:
-	Asteroid();
+	inline Asteroid() {
+		this->mode = GL_LINES;
+	}
+
+	inline void setType(size_t type_) { type = type_; }
+
 	void setVertices(size_t n);
 
 	inline void setSize(float sz) {

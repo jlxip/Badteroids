@@ -10,7 +10,7 @@ class Background {
 public:
 	class BGDraw : public Drawable {
 	private:
-		float velocity = .5; // Windows per second
+		float velocity = .3; // Windows per second
 	public:
 		static void upload();
 		BGDraw();

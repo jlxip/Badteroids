@@ -1,5 +1,6 @@
 #include "Ship.hpp"
 #include <Badteroids/RNG/RNG.hpp>
+#include <cmath>
 
 void Ship::_move(float dx, float dy) {
 	size_t rngarea = (iam == LEFT_SHIP)
@@ -12,11 +13,22 @@ void Ship::_move(float dx, float dy) {
 	else
 		dy += deviation;
 
+	// Are ther resources?
+	float usedH = HYDROGEN_BURN * std::abs(dx + dy);
+	float usedO = OXYGEN_PER_HYDROGEN * usedH;
+
+	if(resources.h < usedH || resources.o < usedO)
+		return; // Oops, you ran out
+
+	// Perform movement
 	auto& model = getModel();
 	model.getInertia().vx += dx;
 	model.getInertia().vy += dy;
-}
 
+	// Use resources
+	resources.h -= usedH;
+	resources.o -= usedO;
+}
 
 void Ship::moveLeft()  { _move(-velocityPerPress, 0); }
 void Ship::moveRight() { _move(+velocityPerPress, 0); }

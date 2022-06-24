@@ -3,7 +3,7 @@
 
 Border::Border(bool horizontal, bool first) {
 	this->VBO_v = BasicModels::Square::VBO_v;
-	this->VBO_c = VBOs::requestBlackVBO(4);
+	this->VBO_c = VBOs::requestColor(VBOs::Color::BLACK, 4);
 	this->VBO_i = BasicModels::Square::VBO_i;
 	this->isize = BasicModels::Square::isize;
 

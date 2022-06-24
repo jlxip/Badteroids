@@ -18,6 +18,9 @@ private:
 	// And when in the current gap it must be emitted
 	Time next = 0;
 
+	float probH = 0.2;
+	float probO = 0.1;
+
 public:
 	Asteroids(float x, size_t rng)
 		: x(x), rng(rng)

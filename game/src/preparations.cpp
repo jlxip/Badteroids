@@ -1,7 +1,7 @@
 #include <Badteroids/Badteroids.hpp>
 #include <basics/models/Square/Square.hpp>
 #include <basics/Text/Text.hpp>
-#include <Badteroids/Bar/Bar.hpp>
+#include <Badteroids/Ship/models/all.hpp>
 #include <Config/Config.hpp>
 #include <Badteroids/RNG/RNG.hpp>
 #include <ctime>
@@ -17,7 +17,6 @@ void preparations() {
 	Text::Fonts::upload();
 	ShipModels::Dummy::upload();
 	Background::BGDraw::upload();
-	Bar::upload();
 
 	// Game initialization
 	glClearColor(0.0, 0.0, 0.0, 1.0);

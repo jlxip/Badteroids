@@ -29,7 +29,7 @@ El jugador deberá tener cuidado con no pasar los límites de la pantalla y fren
 
 Con tal de mantener la atención del jugador, la nave no puede mantenerse en reposo (relativo a la pantalla). Siempre toma lugar un pequeño movimiento incorregible. Comienza siendo uno pequeño hacia arriba a la derecha, en el caso de la nave de la izquierda, y hacia arriba a la izquierda en el caso de la de la derecha. Además, cada vez que el jugador efectúa un movimiento, se produce una desviación aleatoria de hasta el ±5%.
 **** Combate
-La nave tiene diversas armas. La más simple es el arma láser, que realiza un disparo desde proa.
+La nave tiene un arma: el láser, que realiza un disparo desde proa, y no consume recursos.
 
 Un jugador deberá debilitar al oponente con tal de frenar su avance. De no preocuparse por ello, el otro jugador ganará por tiempo. En caso de ambos no combatir, gana la Ciudadela.
 
@@ -88,6 +88,12 @@ Durante una partida, pulsar cualquiera de las teclas CTRL pausa el juego. Se per
 - /RESUME/, para continuar el juego. Pulsar de nuevo CTRL tiene la misma acción. De seleccionarse esta opción, se reanuda la partida.
 - /EXIT/, para abandonar la partida y volver al menú principal.
 
+*** HUD
+Durante una partida, existen ciertos metaelementos en primer plano que aportan información sobre el juego. El indicador de FPS, de estar activo, está en la esquina superior izquierda.
+
+Bajo el contador de FPS está la información para el jugador izquierdo, y en su respectiva posición en la parte derecha de la pantalla está la del jugador derecho.
+
+La información muestra la cantidad de hidrógeno en forma de texto (sobre 100), y, bajo ella, la de oxígeno.
 *** Asteroides
 Los asteroides son grafos completos (K_n) de distintos tamaños, velocidades, y número de vértices, que aparecen girando desde la parte superior de la pantalla. Los más pequeños giran más rápido. Con cada disparo, el número de vértices decrece hasta ser un triángulo. Disparar un triángulo implica destruirlo.
 
@@ -99,6 +105,7 @@ Además, el fondo está en todo momento en movimiento para dar la sensación de 
 ** Generación de mundo
 *** Asteroides
 Los asteroides se generan aleatoriamente. Conforme progresa la partida, cambian sus propiedades:
+- Tipo
 - Periodo de generación
 - Velocidad de movimiento
 - Tamaño
@@ -111,9 +118,15 @@ El periodo de generación no genera los asteroides de forma uniforme. Para evita
 La velocidad de movimiento es un multiplicador condicionado al tamaño del asteroide: los más pequeños se mueven más rápido.
 
 Su coordenada X es generada aleatoriamente.
+
+El tipo es elegido aleatoriamente. Puede ser normal (70%), de hidrógeno (20%), o de oxígeno (10%).
 ** Mercado
 Badteroids está bajo la licencia de /izquierdos de autor/ GNU General Public License v3, y su distribución se llevará a cabo en este mismo repositorio de GitHub de forma gratuita, sin modo oficial de pagar por él.
 ** Historial de cambios
+*** Versión 0.8
+- En "Gameplay y mecánicas -> Núcleo del gameplay -> Combate", ahora solo se menciona la existencia de un arma, el láser, que es la única factible de hacer en el tiempo dado.
+- En "Interfaz y gráficos", añadida sección "HUD".
+- En "Generación de mundo -> Asteroides", añadida mención al tipo.
 *** Versión 0.7
 - En "Gameplay y mecánicas -> Núcleo del gameplay -> Combate", se ha descartado la tercera ley de Newton al disparar. No solo porque no tiene sentido físico (es un láser), sino, más bien, porque ha resultado en un gameplay demasiado difícil de controlar, abrumador.
 - En "Gameplay y mecánicas -> Recursos", se ha descartado la idea de mantener un tiempo agarrado el asteroide de reabastecimiento, pues, aún antes de implementarlo, se ha visto conforme ha avanzado el proyecto que no resultaría divertido. En su lugar, droppean un objeto abstracto.

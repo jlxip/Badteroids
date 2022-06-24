@@ -3,6 +3,8 @@
 #include <vector>
 #include <cmath>
 #include <Badteroids/Ship/Laser/Laser.hpp>
+#include <loop/objects.hpp>
+#include "../Drop/Drop.hpp"
 
 static std::unordered_map<size_t, std::vector<glm::vec2>> vertices;
 static std::unordered_map<size_t, std::vector<Index>> indices;
@@ -28,10 +30,6 @@ static void generate(size_t n) {
 	VBOsi[n] = VBOs::makeIndices(indices[n].data(), n*(n-1));
 }
 
-Asteroid::Asteroid() {
-	this->mode = GL_LINES;
-}
-
 void Asteroid::setVertices(size_t n_) {
 	n = n_;
 	if(vertices.find(n) == vertices.end())
@@ -40,6 +38,18 @@ void Asteroid::setVertices(size_t n_) {
 	this->VBO_v = VBOsv[n];
 	this->VBO_i = VBOsi[n];
 	this->isize = n*(n-1);
+
+	size_t color = VBOs::Color::BLACK;
+	switch(this->type) {
+	case Type::REGULAR:
+		color = VBOs::Color::GREEN; break;
+	case Type::HYDROGEN:
+		color = VBOs::Color::WHITE; break;
+	case Type::OXYGEN:
+		color = VBOs::Color::LIGHTBLUE; break;
+	}
+
+	this->VBO_c = VBOs::requestColor(color, n);
 }
 
 bool Asteroid::collisioned(Drawable* other) {
@@ -49,6 +59,12 @@ bool Asteroid::collisioned(Drawable* other) {
 			setVertices(n);
 			return false;
 		} else {
+			// Boutta be removed. Should drop?
+			if(type != Type::REGULAR) {
+				// Indeed.
+				Objects::cidrawablesp.alloc(new Drop(x, y, inertia.vy, type-1));
+			}
+
 			return true;
 		}
 	}

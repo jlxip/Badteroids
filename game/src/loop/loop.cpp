@@ -22,20 +22,24 @@ void Loop::mainLoop() {
 	// First, take the time
 	Time t = glfwGetTime();
 	Time dt = t - lastTick;
+	lastTick = t;
 
 	// Reset everything
 	glClear(GL_COLOR_BUFFER_BIT);
 	glLoadIdentity();
 
-	// - Game starts here -
 
-	// Background (a bit different than other objects)
+
+	// --- BACKGROUND ---
 	game->getBackground().getDraw().draw();
 	if(game->isInMenu() && !game->isPaused())
 		game->getMenu().draw();
 	else if(!game->isInMenu())
 		game->getBackground().getDraw().textick(dt);
 
+
+
+	// --- DRAWABLES ---
 	Loop::manage_idrs(dt);
 	Loop::manage_cidrs(dt);
 
@@ -43,15 +47,24 @@ void Loop::mainLoop() {
 	if(game->isPlaying() && !game->isPaused())
 		game->tick(t);
 
-	lastTick = t;
-
-	// Draw regular drawables
+	// Regular drawables
 	for(auto& x : Objects::drawables)
 		x.draw();
 
-	// Pause menu, draw above all
+
+
+	// --- PAUSE MENU ---
 	if(game->isPaused())
 		game->getMenu().draw();
+
+
+
+	// --- HUD ---
+	// Resources
+	if(game->leftAlive())
+		game->getLeftShip().drawResources();
+	if(game->rightAlive())
+		game->getRightShip().drawResources();
 
 	// FPS
 	frameAcumTime += dt;
@@ -66,6 +79,8 @@ void Loop::mainLoop() {
 		std::string fpsstr = "fps: " + std::to_string((size_t)fps);
 		Text(fpsstr, 0.5, -0.9, 0.9).draw();
 	}
+
+
 
 	// Shoot frame and manage events
 	glfwSwapBuffers(window);

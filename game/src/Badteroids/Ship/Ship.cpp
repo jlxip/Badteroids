@@ -1,5 +1,6 @@
 #include "Ship.hpp"
 #include <loop/objects.hpp>
+#include "models/all.hpp"
 
 Ship::Ship(bool iam_) {
 	this->iam = iam_;
@@ -8,6 +9,7 @@ Ship::Ship(bool iam_) {
 void Ship::init() {
 	// For now, a dummy ship
 	auto* model = new ShipModels::Dummy;
+	model->setParent(this);
 
 	model->mulScalex(shipScalex);
 	model->mulScaley(shipScaley);

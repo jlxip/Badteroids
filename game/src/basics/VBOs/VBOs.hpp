@@ -29,9 +29,18 @@ namespace VBOs {
 	void drawElements(VBOid id, size_t isize, GLenum mode);
 
 	// --- AXILIARY ---
-	VBOid requestGreenVBO(size_t vertices);
-	VBOid requestRedVBO(size_t vertices);
-	VBOid requestBlackVBO(size_t verices);
+	struct Color {
+		enum {
+			WHITE,
+			BLACK,
+			RED,
+			GREEN,
+			LIGHTBLUE,
+			NCOLORS,
+		};
+	};
+
+	VBOid requestColor(size_t color, size_t vertices);
 };
 
 #endif

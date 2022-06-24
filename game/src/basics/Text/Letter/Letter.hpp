@@ -16,10 +16,10 @@ public:
 			this->VBO_c = NULL_VBO;
 			break;
 		case 1:
-			this->VBO_c = VBOs::requestGreenVBO(4);
+			this->VBO_c = VBOs::requestColor(VBOs::Color::GREEN, 4);
 			break;
 		case 2:
-			this->VBO_c = VBOs::requestRedVBO(4);
+			this->VBO_c = VBOs::requestColor(VBOs::Color::RED, 4);
 			break;
 		}
 	}
