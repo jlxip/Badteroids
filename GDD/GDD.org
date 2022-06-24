@@ -29,7 +29,7 @@ El jugador deberá tener cuidado con no pasar los límites de la pantalla y fren
 
 Con tal de mantener la atención del jugador, la nave no puede mantenerse en reposo (relativo a la pantalla). Siempre toma lugar un pequeño movimiento incorregible. Comienza siendo uno pequeño hacia arriba a la derecha, en el caso de la nave de la izquierda, y hacia arriba a la izquierda en el caso de la de la derecha. Además, cada vez que el jugador efectúa un movimiento, se produce una desviación aleatoria de hasta el ±5%.
 **** Combate
-La nave tiene diversas armas. La más simple es el arma láser, que realiza un disparo desde proa. Aplica la tercera ley de Newton: al disparar, la nave sufre un empuje hacia popa.
+La nave tiene diversas armas. La más simple es el arma láser, que realiza un disparo desde proa.
 
 Un jugador deberá debilitar al oponente con tal de frenar su avance. De no preocuparse por ello, el otro jugador ganará por tiempo. En caso de ambos no combatir, gana la Ciudadela.
 
@@ -60,7 +60,7 @@ La Federación Galáctica es una dictadura autárquica. Sus aeronaves, así, tie
 **** La Ciudadela
 Tras la formación de la Federación, individuos contrarios al régimen, libertarios por naturaleza, fueron marcados como /personas no gratas/. Se exiliaron y formaron /La Ciudadela/, que sigue recibiendo nuevos miembros de forma constante. Sus aeronaves tienen un estilo más /duct tape/, enfocadas en /mantenerse de una pieza/. Esto lo consiguen con mejores defensas y mayores tanques de recursos. A cambio, sacrifican impresionantes maniobras ofensivas y velocidad de movimiento.
 *** Recursos
-En su viaje, las aeronaves encuentran pequeños asteroides que son capaces de atrapar y de las cuales extraer recursos. No es un proceso instantáneo: está a criterio del jugador durante cuánto tiempo quiere mantener agarrado el objeto para la extracción. Puede decidir mantenerlo hasta rellenar su depósito (o exhaustar el asteroide), o bien soltarlo después de unos segundos con tal de cargar menos peso y volver a la velocidad de movimiento usual.
+En su viaje, las aeronaves encuentran asteroides de reabastecimiento, que contienen recursos necesarios para mantener la nave funcionando. Deberán ser destruidos y colisionar con su objeto droppeado.
 **** Hidrógeno
 El hidrógeno hace de combustible en Badteroids. Quedarse sin él implicaría cesar de acelerar y perder así la partida. Se utiliza, además, para cargar armas y escudos en el breve instante durante el que estén disponibles.
 **** Oxígeno
@@ -88,15 +88,37 @@ Durante una partida, pulsar cualquiera de las teclas CTRL pausa el juego. Se per
 - /RESUME/, para continuar el juego. Pulsar de nuevo CTRL tiene la misma acción. De seleccionarse esta opción, se reanuda la partida.
 - /EXIT/, para abandonar la partida y volver al menú principal.
 
+*** Asteroides
+Los asteroides son grafos completos (K_n) de distintos tamaños, velocidades, y número de vértices, que aparecen girando desde la parte superior de la pantalla. Los más pequeños giran más rápido. Con cada disparo, el número de vértices decrece hasta ser un triángulo. Disparar un triángulo implica destruirlo.
+
+Los asteroides normales son verdes. Los que contienen hidrógeno, blancos. Los que tienen oxígeno, azules.
 *** El fondo
 En la partida, en todo momento hay un fondo estelado, cargado de una textura generada aleatoriamente en el momento. Se genera proceduramente, lo que no limita la resolución a la que se debe jugar.
 
 Además, el fondo está en todo momento en movimiento para dar la sensación de velocidad. Al principio, el movimiento es lento. Cuando se acerca el final del juego, la atracción gravitatoria del agujero negro es mayor, lo que provoca una fuerza (aceleración) mayor, y el movimiento del fondo es mayor.
 ** Generación de mundo
-(Pendiente de definir)
+*** Asteroides
+Los asteroides se generan aleatoriamente. Conforme progresa la partida, cambian sus propiedades:
+- Periodo de generación
+- Velocidad de movimiento
+- Tamaño
+- Número de vértices
+
+Al inicio del juego, se genera un asteroide cada dos segundos, con velocidad de movimiento 1.
+
+El periodo de generación no genera los asteroides de forma uniforme. Para evitar la monotonía, al inicio del periodo (/gap/) se genera aleatoriamente un deadline dentro del rango dado, y, al pasarlo, se emite.
+
+La velocidad de movimiento es un multiplicador condicionado al tamaño del asteroide: los más pequeños se mueven más rápido.
+
+Su coordenada X es generada aleatoriamente.
 ** Mercado
 Badteroids está bajo la licencia de /izquierdos de autor/ GNU General Public License v3, y su distribución se llevará a cabo en este mismo repositorio de GitHub de forma gratuita, sin modo oficial de pagar por él.
 ** Historial de cambios
+*** Versión 0.7
+- En "Gameplay y mecánicas -> Núcleo del gameplay -> Combate", se ha descartado la tercera ley de Newton al disparar. No solo porque no tiene sentido físico (es un láser), sino, más bien, porque ha resultado en un gameplay demasiado difícil de controlar, abrumador.
+- En "Gameplay y mecánicas -> Recursos", se ha descartado la idea de mantener un tiempo agarrado el asteroide de reabastecimiento, pues, aún antes de implementarlo, se ha visto conforme ha avanzado el proyecto que no resultaría divertido. En su lugar, droppean un objeto abstracto.
+- En "Interfaz y gráficos", se ha añadido "Asteroides".
+- En "Generación de mundo", se ha añadido también "Asteroides".
 *** Versión 0.6
 - En "Conceptos -> Background", párrafo sobre "oda al bajo nivel".
 - En "Interfaz y gráficos -> Menús", "Menú de pausa".
