@@ -3,6 +3,9 @@
 #include "models/all.hpp"
 #include "skills/skills.hpp"
 #include "ShipTimedEvent.hpp"
+#include <Badteroids/Badteroids.hpp>
+
+extern Badteroids* game;
 
 Ship::Ship(bool iam_) {
 	this->iam = iam_;
@@ -70,7 +73,7 @@ void Ship::tick() {
 	auto it = TimedEvents::events.begin();
 	while(it != TimedEvents::events.end()) {
 		TimedEvents::TimedEvent* e = *it;
-		if(e->deadline > now)
+		if(e->deadline > game->getInGameTime())
 			break; // That's it, because it's sorted
 
 		if(e->isShip) {

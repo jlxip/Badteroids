@@ -18,7 +18,7 @@ void Skills::Destabilize::fire() {
 
 	// Start timer
 	auto* te = new TimedEvents::ShipRelated;
-	te->base.deadline = now + duration;
+	te->base.deadline = game->getInGameTime() + duration;
 	te->mulDeviation = factor;
 	TimedEvents::events.insert((TimedEvents::TimedEvent*)te);
 

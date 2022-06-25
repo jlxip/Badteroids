@@ -51,3 +51,14 @@ void Badteroids::leave() {
 void Badteroids::exit() {
 	glfwSetWindowShouldClose(window, true);
 }
+
+void Badteroids::tick(Time dt) {
+	if(playing && !paused)
+		inGameTime += dt;
+
+	leftAst.tick();
+	rightAst.tick();
+
+	leftShip.tick();
+	rightShip.tick();
+}

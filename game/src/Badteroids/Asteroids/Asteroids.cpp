@@ -2,26 +2,31 @@
 #include <Badteroids/RNG/RNG.hpp>
 #include "Asteroid/Asteroid.hpp"
 #include <loop/objects.hpp>
+#include <Badteroids/Badteroids.hpp>
+
+extern Badteroids* game;
 
 void Asteroids::tick() {
+	Time t = game->getInGameTime();
+
 	// Must emmit?
-	if(now >= lastGap + period) {
+	if(t >= lastGap + period) {
 		// No, but must schedule for one
-		lastGap = now;
-		next = now + RNG::genf(rng, 0, period);
-	} else if(now >= next) {
+		lastGap = t;
+		next = t + RNG::genf(rng, 0, period);
+	} else if(t >= next) {
 		// Yes, emmit it now
 		emmit();
-		next = now + period; // Make it unreachable
+		next = t + period; // Make it unreachable
 	}
 
 	// What about red asteroid?
-	if(now >= lastRedGap + redPeriod) {
-		lastRedGap = now;
-		nextRed = now + RNG::genf(rng, 0, redPeriod);
-	} else if(now >= nextRed) {
+	if(t >= lastRedGap + redPeriod) {
+		lastRedGap = t;
+		nextRed = t + RNG::genf(rng, 0, redPeriod);
+	} else if(t >= nextRed) {
 		emmit(true);
-		nextRed = now + redPeriod;
+		nextRed = t + redPeriod;
 	}
 }
 

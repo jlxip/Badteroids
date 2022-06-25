@@ -42,16 +42,8 @@ public:
 	void leave();
 	void exit();
 
-	inline void tick(Time dt) {
-		if(playing && !paused)
-			inGameTime += dt;
-
-		leftAst.tick();
-		rightAst.tick();
-
-		leftShip.tick();
-		rightShip.tick();
-	}
+	inline Time getInGameTime() const { return inGameTime; }
+	void tick(Time dt);
 
 	inline Background& getBackground() { return background; }
 	inline Ship& getLeftShip() { return leftShip; }

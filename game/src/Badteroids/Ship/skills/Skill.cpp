@@ -1,4 +1,7 @@
 #include "Skill.hpp"
+#include <Badteroids/Badteroids.hpp>
+
+extern Badteroids* game;
 
 void Skills::Skill::setHUDposition(size_t pos) {
 	model.sety(0.6);
@@ -29,7 +32,7 @@ void Skills::Skill::setHUDposition(size_t pos) {
 float Skills::Skill::timeUntilCooldown() {
 	float cooldown = getCooldown();
 
-	float past = now - lastShot;
+	float past = game->getInGameTime() - lastShot;
 	if(past > cooldown)
 		return 0;
 
@@ -47,7 +50,7 @@ void Skills::Skill::takeResources() {
 	ship->addH(-expenseH());
 	ship->addO(-expenseO());
 
-	lastShot = now;
+	lastShot = game->getInGameTime();
 }
 
 bool Skills::Skill::canFire() {

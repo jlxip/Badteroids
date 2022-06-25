@@ -55,7 +55,7 @@ Con tal del avanzar, los jugadores deberán:
 El flujo es por naturaleza lineal: ambos intentan avanzar en un camino fijo hacia el agujero negro que sostiene la galaxia. Durante el proceso, encontrarán de forma consistente:
 
 - Asteroides de distintos tamaños que deberán de esquivar o destruir.
-- Pequeños asteroides que contienen recursos, que podrán capturar y así repostar.
+- Otros asteroides que contienen recursos, que podrán capturar y así repostar.
 
 Conforme avance la carrera y los jugadores se aproximen al centro, irá cambiando el escenario. Esto evitará mantener un gameplay idéntico. Durante las distintas fases:
 
