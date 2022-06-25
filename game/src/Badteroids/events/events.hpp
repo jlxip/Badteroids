@@ -40,4 +40,7 @@ void _menuEnter();
 
 void _pause();
 
+void _skip();
+void _godMode();
+
 #endif

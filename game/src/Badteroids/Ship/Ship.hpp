@@ -53,6 +53,8 @@ public:
 		return true;
 	}
 
+	inline bool getiam() const { return iam; }
+
 	void tick();
 
 	inline Drawable& getModel() { return *Objects::cidrawablesp[obj]; }

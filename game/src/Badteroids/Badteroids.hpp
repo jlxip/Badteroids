@@ -6,6 +6,7 @@
 #include "Ship/Ship.hpp"
 #include "Asteroids/Asteroids.hpp"
 #include "RNG/RNG.hpp"
+#include "Background/EventHorizon.hpp"
 
 // Welcome.
 // All objects in Badteroids live in a [-1, +1]x[-1, +1] plane
@@ -28,10 +29,28 @@ private:
 	bool playing = false;
 	bool showFPS = false;
 	bool paused = false;
+	bool godMode = false;
+
+	bool someoneWon = false;
+	bool whoWon = false;
 
 	Time inGameTime = 0; // Seconds
 	static constexpr float ACCELERATION = -0.022222222;
 	static constexpr float MAX_DISTANCE = 1000;
+
+	struct Stage {
+		enum {
+			BEGINNING,
+			ASTEROID_BELT,
+			BREAK,
+			EVENT_HORIZON,
+		};
+	};
+	size_t stage = Stage::BEGINNING;
+	static constexpr Time tAsteroidBelt = 2 * 60;
+	static constexpr Time tBreak = 2.5 * 60;
+	static constexpr Time tEventHorizon = 4 * 60;
+	EventHorizon eventHorizon;
 
 public:
 	Badteroids();
@@ -41,9 +60,19 @@ public:
 	void startGame();
 	void leave();
 	void exit();
+	void win(bool who);
+
+	inline bool isGodMode() { return godMode; }
+	inline void enterGodMode() {
+		std::cout << "--- Entering God mode ---" << std::endl;
+		godMode = true;
+	}
+	void cheatSkip();
 
 	inline Time getInGameTime() const { return inGameTime; }
+	void veryFirstTick(Time dt);
 	void tick(Time dt);
+	void veryLastTick();
 
 	inline Background& getBackground() { return background; }
 	inline Ship& getLeftShip() { return leftShip; }

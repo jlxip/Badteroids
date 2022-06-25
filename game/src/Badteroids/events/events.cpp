@@ -85,3 +85,6 @@ void _menuRight() { if(game->isInMenu()) game->getMenu().move(3); }
 void _menuEnter() { if(game->isInMenu()) game->getMenu().move(99); }
 
 void _pause() { if(game->isPlaying()) game->switchPause(); }
+
+void _skip() { game->cheatSkip(); }
+void _godMode() { game->enterGodMode(); }

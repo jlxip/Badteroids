@@ -37,7 +37,7 @@ void Loop::mainLoop() {
 		game->getMenu().draw();
 	else if(!game->isInMenu())
 		game->getBackground().getDraw().textick(dt);
-
+	game->veryFirstTick(dt);
 
 
 	// --- DRAWABLES ---
@@ -51,6 +51,8 @@ void Loop::mainLoop() {
 	// Regular drawables
 	for(auto& x : Objects::drawables)
 		x.draw();
+
+	game->veryLastTick();
 
 
 

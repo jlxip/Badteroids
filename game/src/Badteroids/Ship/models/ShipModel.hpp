@@ -15,13 +15,7 @@ namespace ShipModels {
 		inline void setParent(Ship* x) { parent = x; }
 		inline Ship& getParent() { return *parent; }
 
-		inline bool collisioned(Drawable* other) override {
-			if(instanceof<Laser>(other))
-				return false;
-			if(instanceof<Drop>(other))
-				return false;
-			return true;
-		}
+		bool collisioned(Drawable* other) override;
 	};
 };
 

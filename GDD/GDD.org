@@ -1,35 +1,35 @@
-* Badteroids: Documento de Diseño
-** Conceptos
-*** Introducción
+#+TITLE: Badteroids: Documento de Diseño
+#+OPTIONS: toc:nil
+
+* Conceptos
+** Introducción
 Badteroids es un juego competitivo en 2D para Linux. Tras un enfrentamiento entre dos naciones de Andrómeda, la Federación Galáctica y la Ciudadela, la segunda se propone destruir la galaxia, y la primera deberá de impedirlo, cada una en un aeronave de su Estado, lado a lado.
-*** /Background/
+** /Background/
 Badteroids se propone como el juego a desarrollar para la asignatura Programación Lúdica de la carrera de Ingeniería Informática de la UGR. Por la imposibilidad de dedicarle mucho tiempo, se intentarán mantener unos objetivos lo más modestos posibles pero llevándolos bien a cabo.
 
 Además, escrito en C++ y OpenGL, usando metodología de diseño orientado a datos en la mayoría de casos, Badteroids es una /oda al bajo nivel/, y esto se puede apreciar en todo momento en el juego.
-*** Descripción
+** Descripción
 El punto del juego es competir localmente. Por esto, la idea más importante, y la que se tendrá en mente para cada decisión, será que un videojuego de este tipo es más divertido cuando las acciones de un jugador repercuten sobre el otro, en lugar de considerar un sistema de puntuación aislado. Será, además, crítico evitar la monotonía interna (durante las partidas), así como la externa (de partida en partida).
-*** Características clave
+** Características clave
 - *PVP*: los jugadores combaten el uno contra el otro con tal de frenar su progreso o debilitarlos.
 - *PVE*: los jugadores se abastecen de los recursos necesarios para avanzar y se defienden de ataques de un entorno inhóspito.
 - *Niveles* generados proceduralmente para mantener cada partida única.
 - *Partidas cortas* para no prolongar la tensión más tiempo del necesario.
-*** Género
+** Género
 Badteroids sigue los géneros /arcade en 2D/, /casual/, /retro/, y /acción/. Además, con respecto al gameplay, es /multijugador local/ de /pantalla dividida/.
-*** Plataforma
-La plataforma objetivo es GNU/Linux. Existirá la posibilidad de fabricar binarios independientes de la arquitectura solo si no se requiere complicar el código para ello, pero GNU/Linux es la plataforma principal.
-*** Arte conceptual
-[[./imgs/main_idea.png]]
-** Gameplay y mecánicas
-*** Núcleo del gameplay
+** Plataforma
+La plataforma objetivo es exclusivamente GNU/Linux.
+* Gameplay y mecánicas
+** Núcleo del gameplay
 La idea detrás del gameplay es modesta: en pantalla dividida, los jugadores avanzan e intentan evitar el avance de su oponente.
-**** Movimiento
+*** Movimiento
 Uno de los intereses de Badteroids se encuentra en que los sucesos ocurren en el espacio. Por lo tanto, no hay presencia de atmósfera, sino vacío. Así, todo movimiento no es frenado por el rozamiento del aire, sino que el momento lineal se conserva. Cada pulsación de tecla conlleva un incremento de velocidad en un eje a costa de una disminución del recurso que se expulsa para conseguir dicho movimiento. Aplica, entonces, la primera ley de Newton: para frenar, es necesario crear un empuje (/thrust/) en el sentido opuesto.
 
 El jugador deberá tener cuidado con no pasar los límites de la pantalla. De colisionar con uno, perderá la partida.
 
 Con tal de mantener la atención del jugador, la nave no puede mantenerse en reposo (relativo a la pantalla). Siempre toma lugar un pequeño movimiento incorregible. Comienza siendo uno pequeño hacia arriba a la derecha, en el caso de la nave de la izquierda, y hacia arriba a la izquierda en el caso de la de la derecha. Además, cada vez que el jugador efectúa un movimiento, se produce una desviación aleatoria de hasta el +5%.
 
-**** Combate
+*** Combate
 La nave tiene un arma: el láser, que realiza un disparo desde proa, y no consume recursos.
 
 Un jugador deberá debilitar al oponente con tal de frenar su avance. De no preocuparse por ello, el otro jugador ganará por tiempo. En caso de ambos no combatir, gana la Ciudadela.
@@ -45,13 +45,13 @@ Las habilidades disponibles son:
 |      1 | Estabilizar |     0 |    10 |        5 | Lleva la nave a un estado muy próximo al reposo relativo           |
 |      2 | Descalibrar |    20 |     5 |       20 | Aumenta la desviación del oponente en un 5000% durante 10 segundos |
 
-**** Avance
+*** Avance
 Con tal del avanzar, los jugadores deberán:
 
 - Intentar defenderse mediante el uso de habilidades.
 - Esquivar o destruir los asteroides del entorno.
 - Repostar los recursos necesarios para mantener la nave en marcha.
-*** Flujo de la partida
+** Flujo de la partida
 El flujo es por naturaleza lineal: ambos intentan avanzar en un camino fijo hacia el agujero negro que sostiene la galaxia. Durante el proceso, encontrarán de forma consistente:
 
 - Asteroides de distintos tamaños que deberán de esquivar o destruir.
@@ -64,23 +64,34 @@ Conforme avance la carrera y los jugadores se aproximen al centro, irá cambiand
 - Habrá ligeras alteraciones en el PVP. Por ejemplo, ataques que solo existen durante cierta parte de la carrera.
 
 Estos cambios durante el gameplay le dan un ligero toque de estrategia al juego. Podrá ser conveniente realizar ciertas acciones en ciertos momentos de la partida. Por ejemplo, más cerca del agujero negro algunos ataques costarán menos recursos por poder aprovecharse de la aceleración gravitatoria de este.
-*** Naciones
-**** Federación Galáctica
+** Naciones
+*Nota para el profesor*: nada de esto, es decir, todo el tema naciones, está implementado.
+
+*** Federación Galáctica
 La Federación Galáctica es una dictadura autárquica. Sus aeronaves, así, tienen un estilo serio, y se enfocan a ofrecer la máxima velocidad de movimiento para esquivar asteroides y espacio para armas. /Nada imprescindible a bordo/ es su principal preocupación. Por esto, tienen depósitos más pequeños para recursos, necesitan repostar más a menudo, y sus maniobras defensivas tienen poca duración.
-**** La Ciudadela
+*** La Ciudadela
 Tras la formación de la Federación, individuos contrarios al régimen, libertarios por naturaleza, fueron marcados como /personas no gratas/. Se exiliaron y formaron /La Ciudadela/, que sigue recibiendo nuevos miembros de forma constante. Sus aeronaves tienen un estilo más /duct tape/, enfocadas en /mantenerse de una pieza/. Esto lo consiguen con mejores defensas y mayores tanques de recursos. A cambio, sacrifican impresionantes maniobras ofensivas y velocidad de movimiento.
-*** Recursos
+** Recursos
 En su viaje, las aeronaves encuentran asteroides de reabastecimiento, que contienen recursos necesarios para mantener la nave funcionando. Deberán ser destruidos y colisionar con su objeto droppeado.
-**** Hidrógeno
+*** Hidrógeno
 El hidrógeno hace de combustible en Badteroids. Quedarse sin él implicaría cesar de acelerar y perder así la partida. Se utiliza, además, para cargar armas y escudos en el breve instante durante el que estén disponibles.
-**** Oxígeno
+*** Oxígeno
 Todo ser vivo, y esto incluye los seres de Andrómeda, necesita oxígeno para mantener una atmósfera en la cual sobrevivir. No siendo esto bastante, es además necesario en pequeñas cantidades como catalizador en las combustiones de hidrógeno. Quedarse sin oxígeno conllevaría la muerte inmediata del comandante.
-*** Fases de la carrera
-**** Longitud
+** Fases de la carrera
+*** Longitud
 Se busca una duración de partida de 5 minutos desde el inicio hasta el agujero negro. Por efectos gravitatorios, cuanto más cerca se esté, más rápido decrecerá la distancia (en pársecs). Se puede fijar la distancia a recorrer en 1000 pársecs. Se busca, así, la aceleración.
 
 Se trata de un movimiento rectilíneo uniformemente acelerado, y su ecuación es: $e=\frac{1}{2} a t^2 + v_0 t + e_0$. En $t=0$, la distancia es máxima ($e = e_0 = 1000$). Se parte desde el reposo, $v_0=0$. Con todo esto, $0 = \frac{1}{2} a \cdot 5^2 + 1000 \iff -1000 = 12.5 a \iff a = -80 \; pc/m^2 = -0.02222 \; pc/s^2$.
-*** Controles
+*** Fases
+Las fases (/stages/) de la partida son las siguientes:
+
+| Comienzo |  Fin | Nombre                 | Descripción                                                                                  |
+|----------+------+------------------------+----------------------------------------------------------------------------------------------|
+|     0:00 | 2:00 | Comienzo               | Estado usual de Badteroids                                                                   |
+|     2:00 | 2:30 | Cinturón de asteroides | Se cuadriplica la frecuencia de generación de asteroides, y estos son más pequeños (más rápidos) |
+|     2:30 | 4:00 | Descanso               | Vuelta al estado usual durante minuto y medio                                                |
+|     4:00 | 5:00 | Horizonte de eventos   | En la marca de los cuatro minutos se pasa el horizonte de eventos. A partir de ahí, desaparecen las estrellas del fondo y dejan de aparecer asteroides  |
+** Controles
 Los controles están pensados para ser jugados por cada jugador con su mano derecha, ambos sobre el teclado.
 
 Para el jugador de la izquierda, los controles son:
@@ -95,28 +106,34 @@ Para el jugador de la izquierda, los controles son:
 
 Para el de la derecha, son análogos, pero con ~IJKL~ en lugar de ~WASD~. Entonces, ~QEZX~ serían ~UOM,~.
 
-** Interfaz y gráficos
-*** Menús
+Los botones de ~Ctrl~, tanto el izquierdo como el derecho, para que puedan pulsarlo ambos jugadores, pausan el juego.
+
+Las siguientes son herramientas de debugging (trucos):
+- ~F11~: avanza artificialmente el tiempo de juego hasta 5 segundos antes del siguiente /stage/.
+- ~F12~: modo Dios. Las aeronaves no resuelven colisiones.
+
+* Interfaz y gráficos
+** Menús
 Badteroids tiene tres pantallas de menú: la principal, la de ajustes, y la de pausa.
-**** Menú principal
+*** Menú principal
 Se muestra al iniciar el juego. Su fondo es el usual de Badteroids, salvo que es estático. Contiene el título del videojuego, y tres opciones:
 - /PLAY/, para comenzar una nueva partida.
 - /SETTINGS/, abre el menú de ajustes.
 - /EXIT/, para salir.
 
-**** Menú de ajustes
+*** Menú de ajustes
 Al entrar en /SETTINGS/ dentro del menú principal, aparecen opciones de ajustes del juego, bajo el rótulo /SETTINGS/, y sobre un botón /BACK/ para volver. Los cambios deberán guardarse automáticamente al modificarse, y permanecer al reiniciar el juego.
 
 - /VSync/Flex mode/, selecciona entre dos modos de dibujado de frames: VSync, es decir, una vez entre refresco de pantallas, lo que evita el tearing, y /Flex mode/, es decir, sin límite de FPS, para poder medir los valores que alcanza el juego. Por defecto, se usa VSync.
 - /MSAA/, selecciona el nivel de Multi-Sample Anti-Aliasing a usar. Los valores posibles son: 0, 2, 4, 8, 16, y 32. Por defecto, se usa MSAAx16.
 - /FPS off/on/, permite elegir entre mostrar los FPS en la esquina superior izquierda de la pantalla u ocultarlos. Por defecto, no se muestran.
 
-**** Menú de pausa
-Durante una partida, pulsar cualquiera de las teclas CTRL pausa el juego. Se permite de esta manera para que ambos jugadores puedan pausar en todo momento. En este menú, bajo el rótulo /PAUSE/, se muestran dos opciones:
+*** Menú de pausa
+Durante una partida, como se dijo anteriormente, pulsar cualquiera de las teclas CTRL pausa el juego. Se permite de esta manera para que ambos jugadores puedan pausar en todo momento. En este menú, bajo el rótulo /PAUSE/, se muestran dos opciones:
 - /RESUME/, para continuar el juego. Pulsar de nuevo CTRL tiene la misma acción. De seleccionarse esta opción, se reanuda la partida.
 - /EXIT/, para abandonar la partida y volver al menú principal.
 
-*** HUD
+** HUD
 Durante una partida, existen ciertos metaelementos en primer plano que aportan información sobre el juego. El indicador de FPS, de estar activo, está en la esquina superior izquierda.
 
 Bajo el contador de FPS está la información para el jugador izquierdo, y en su respectiva posición en la parte derecha de la pantalla está la del jugador derecho.
@@ -124,16 +141,16 @@ Bajo el contador de FPS está la información para el jugador izquierdo, y en su
 La información muestra la cantidad de hidrógeno en forma de texto (sobre 100), y, bajo ella, la de oxígeno.
 
 En la parte superior central de la pantalla, se encuentra un medidor de distancia hasta el centro del agujero negro.
-*** Asteroides
+** Asteroides
 Los asteroides son grafos completos (K_n) de distintos tamaños, velocidades, y número de vértices, que aparecen girando desde la parte superior de la pantalla. Los más pequeños giran más rápido. Con cada disparo, el número de vértices decrece hasta ser un triángulo. Disparar un triángulo implica destruirlo.
 
 Los asteroides normales son verdes. Los que contienen hidrógeno, blancos. Los que tienen oxígeno, azules. Y los de habilidad, rojos.
-*** El fondo
+** El fondo
 En la partida, en todo momento hay un fondo estelado, cargado de una textura generada aleatoriamente en el momento. Se genera proceduramente, lo que no limita la resolución a la que se debe jugar.
 
-Además, el fondo está en todo momento en movimiento para dar la sensación de velocidad. Al principio, el movimiento es lento. Cuando se acerca el final del juego, la atracción gravitatoria del agujero negro es mayor, lo que provoca una fuerza (aceleración) mayor, y el movimiento del fondo es mayor.
-** Generación de mundo
-*** Asteroides
+Además, el fondo está en todo momento en movimiento para dar la sensación de velocidad.
+* Generación de mundo
+** Asteroides
 Los asteroides se generan aleatoriamente. Conforme progresa la partida, cambian sus propiedades:
 - Tipo
 - Periodo de generación
@@ -154,39 +171,46 @@ El tipo es elegido aleatoriamente. Puede ser normal (70%), de hidrógeno (20%), 
 Los asteroides de habilidad no son generados de la misma manera que el resto. Supongamos que el número de habilidades totales es $n$. Se comienza con una, con lo que se han de generar, durante la partida $n-1$ asteroides de este tipo. Se divide el tiempo de la partida (5 minutos, 300 segundos) en franjas de $\frac{300}{n}$ segundos. La última se deja vacía, porque dar una habilidad tan próxima al final no tiene sentido. Dentro de las otras franjas, se emite un asteroide rojo en cualquier punto de ellas, de forma análoga a lo explicado anteriormente.
 
 Con tal de ser más fácil de acertar, el asteroide rojo es de un tamaño fijo mayor al resto, y siempre aparece en la mitad de la pantalla.
-** Mercado
+* Mercado
 Badteroids está bajo la licencia de /izquierdos de autor/ GNU General Public License v3, y su distribución se llevará a cabo en este mismo repositorio de GitHub de forma gratuita, sin modo oficial de pagar por él.
-** Historial de cambios
-*** Versión 0.10
+* Historial de cambios
+** Versión 1.0
+- En "Gameplay y mecánicas -> Fases de la carrera", se ha añadido todo el apartado de "Fases".
+- En "Gameplay y mecánicas -> Controles", añadida la sección de trucos.
+- En "Gameplay y mecánicas -> Naciones", mención de que no estará implementado en la beta de entrega.
+- En "Interfaz y gráficos -> El fondo", eliminados comentarios sobre la aceleración del fondo, pues no existe.
+- En "Conceptos -> Plataforma", solo se permite GNU/Linux.
+- Eliminado arte conceptual, preparado para la exportación del HTML.
+** Versión 0.10
 - En "Gampelay y mecánicas -> Núcleo del gameplay -> Combate", se explican las habilidades.
 - En "Generación de mundo -> Asteroides", se ha añadido el de habilidad.
 - En "Gameplay y mecánicas", se ha añadido "Controles"
 - En "Gameplay y mecánicas -> Núcleo del gameplay -> Movimiento", ahora la desviación es del +5% en lugar de más-menos, para hacer posible la habilidad "Descalibrar".
 - En "Conceptos -> Background", especificado que el OOD se usa en la mayoría de casos 👀
-*** Versión 0.9
+** Versión 0.9
 - En "Gameplay y mecánicas", se ha comenzado "Fases de la carrera", que estaba pendiente hasta ahora.
 - En "Interfaz y gráficos -> HUD", mención al contador de distancia.
-*** Versión 0.8
+** Versión 0.8
 - En "Gameplay y mecánicas -> Núcleo del gameplay -> Combate", ahora solo se menciona la existencia de un arma, el láser, que es la única factible de hacer en el tiempo dado.
 - En "Interfaz y gráficos", añadida sección "HUD".
 - En "Generación de mundo -> Asteroides", añadida mención al tipo.
-*** Versión 0.7
+** Versión 0.7
 - En "Gameplay y mecánicas -> Núcleo del gameplay -> Combate", se ha descartado la tercera ley de Newton al disparar. No solo porque no tiene sentido físico (es un láser), sino, más bien, porque ha resultado en un gameplay demasiado difícil de controlar, abrumador.
 - En "Gameplay y mecánicas -> Recursos", se ha descartado la idea de mantener un tiempo agarrado el asteroide de reabastecimiento, pues, aún antes de implementarlo, se ha visto conforme ha avanzado el proyecto que no resultaría divertido. En su lugar, droppean un objeto abstracto.
 - En "Interfaz y gráficos", se ha añadido "Asteroides".
 - En "Generación de mundo", se ha añadido también "Asteroides".
-*** Versión 0.6
+** Versión 0.6
 - En "Conceptos -> Background", párrafo sobre "oda al bajo nivel".
 - En "Interfaz y gráficos -> Menús", "Menú de pausa".
-*** Versión 0.5
+** Versión 0.5
 - En "Interfaz y gráficos", sección sobre los menús.
-*** Versión 0.4
+** Versión 0.4
 - En "Gameplay y mecánicas", especificación del arma láser.
-*** Versión 0.3
+** Versión 0.3
 - Comenzado "Interfaz y gráficos" con "El fondo"
-*** Versión 0.2.1
+** Versión 0.2.1
 - Cambiada la desviación aleatoria de movimiento de +5% a ±5%.
-*** Versión 0.2
+** Versión 0.2
 - Añadida mecánica de movimiento inercial y con desviación aleatoria.
-*** Versión 0.1
+** Versión 0.1
 - Primera redacción del documento.

@@ -26,6 +26,11 @@ private:
 	float probH = 0.2;
 	float probO = 0.1;
 
+	static constexpr float minSize = 0.75;
+	float maxSize = 2.5;
+
+	bool disabled = false;
+
 	void emmit(bool red=false);
 
 public:
@@ -36,7 +41,23 @@ public:
 	void tick();
 	inline void reset() {
 		lastGap = next = lastRedGap = nextRed = -10000; // Big enough.
+		maxSize = 2.5;
+		disabled = false;
 	}
+
+	inline void setAsteroidBelt(bool v) {
+		if(v) {
+			// Turn on
+			period = 0.5;
+			maxSize = 0.75;
+		} else {
+			// Normal values
+			period = 2;
+			maxSize = 2.5;
+		}
+	}
+
+	inline void disable() { disabled = true; }
 };
 
 #endif

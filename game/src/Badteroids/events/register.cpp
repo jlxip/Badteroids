@@ -37,4 +37,7 @@ void Badteroids::registerEvents() {
 
 	Keyboard::setKeyPress(GLFW_KEY_LEFT_CONTROL, _pause);
 	Keyboard::setKeyPress(GLFW_KEY_RIGHT_CONTROL, _pause);
+
+	Keyboard::setKeyPress(GLFW_KEY_F11, _skip);
+	Keyboard::setKeyPress(GLFW_KEY_F12, _godMode);
 }

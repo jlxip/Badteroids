@@ -9,6 +9,9 @@ extern Badteroids* game;
 void Asteroids::tick() {
 	Time t = game->getInGameTime();
 
+	if(disabled)
+		return;
+
 	// Must emmit?
 	if(t >= lastGap + period) {
 		// No, but must schedule for one
@@ -53,7 +56,7 @@ void Asteroids::emmit(bool red) {
 		ast->setVertices(RNG::geni(rng, 3, 7));
 
 		// Size
-		float sz = RNG::genf(rng, 0.75, 2.5);
+		float sz = RNG::genf(rng, minSize, maxSize);
 		ast->setSize(sz);
 
 		// Position
