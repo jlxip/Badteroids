@@ -10,6 +10,7 @@ public:
 			REGULAR,
 			HYDROGEN,
 			OXYGEN,
+			SKILL,
 		};
 	};
 

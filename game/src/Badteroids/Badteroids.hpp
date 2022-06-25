@@ -42,12 +42,15 @@ public:
 	void leave();
 	void exit();
 
-	inline void tick(Time t, Time dt) {
+	inline void tick(Time dt) {
 		if(playing && !paused)
 			inGameTime += dt;
 
-		leftAst.tick(t);
-		rightAst.tick(t);
+		leftAst.tick();
+		rightAst.tick();
+
+		leftShip.tick();
+		rightShip.tick();
 	}
 
 	inline Background& getBackground() { return background; }

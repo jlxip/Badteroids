@@ -32,6 +32,8 @@ void Badteroids::startGame() {
 	// Reset ships
 	leftShip.reset();
 	rightShip.reset();
+	leftAst.reset();
+	rightAst.reset();
 }
 
 void Badteroids::leave() {

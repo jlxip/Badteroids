@@ -14,6 +14,7 @@ void Drawable::draw() const {
 	glTranslatef(x, y, 0.0);
 	glScalef(scalex, scaley, 1.0);
 	glRotatef(r, 0, 0, 1.0);
+	glLineWidth(lineWidth);
 
 	// Vertices
 	glEnableClientState(GL_VERTEX_ARRAY);

@@ -5,7 +5,7 @@ Badteroids es un juego competitivo en 2D para Linux. Tras un enfrentamiento entr
 *** /Background/
 Badteroids se propone como el juego a desarrollar para la asignatura Programación Lúdica de la carrera de Ingeniería Informática de la UGR. Por la imposibilidad de dedicarle mucho tiempo, se intentarán mantener unos objetivos lo más modestos posibles pero llevándolos bien a cabo.
 
-Además, escrito en C++ y OpenGL, usando metodología de diseño orientado a datos, Badteroids es una /oda al bajo nivel/, y esto se puede apreciar en todo momento en el juego.
+Además, escrito en C++ y OpenGL, usando metodología de diseño orientado a datos en la mayoría de casos, Badteroids es una /oda al bajo nivel/, y esto se puede apreciar en todo momento en el juego.
 *** Descripción
 El punto del juego es competir localmente. Por esto, la idea más importante, y la que se tendrá en mente para cada decisión, será que un videojuego de este tipo es más divertido cuando las acciones de un jugador repercuten sobre el otro, en lugar de considerar un sistema de puntuación aislado. Será, además, crítico evitar la monotonía interna (durante las partidas), así como la externa (de partida en partida).
 *** Características clave
@@ -25,20 +25,30 @@ La idea detrás del gameplay es modesta: en pantalla dividida, los jugadores ava
 **** Movimiento
 Uno de los intereses de Badteroids se encuentra en que los sucesos ocurren en el espacio. Por lo tanto, no hay presencia de atmósfera, sino vacío. Así, todo movimiento no es frenado por el rozamiento del aire, sino que el momento lineal se conserva. Cada pulsación de tecla conlleva un incremento de velocidad en un eje a costa de una disminución del recurso que se expulsa para conseguir dicho movimiento. Aplica, entonces, la primera ley de Newton: para frenar, es necesario crear un empuje (/thrust/) en el sentido opuesto.
 
-El jugador deberá tener cuidado con no pasar los límites de la pantalla y frenar antes. En otro caso, perderá la partida.
+El jugador deberá tener cuidado con no pasar los límites de la pantalla. De colisionar con uno, perderá la partida.
 
-Con tal de mantener la atención del jugador, la nave no puede mantenerse en reposo (relativo a la pantalla). Siempre toma lugar un pequeño movimiento incorregible. Comienza siendo uno pequeño hacia arriba a la derecha, en el caso de la nave de la izquierda, y hacia arriba a la izquierda en el caso de la de la derecha. Además, cada vez que el jugador efectúa un movimiento, se produce una desviación aleatoria de hasta el ±5%.
+Con tal de mantener la atención del jugador, la nave no puede mantenerse en reposo (relativo a la pantalla). Siempre toma lugar un pequeño movimiento incorregible. Comienza siendo uno pequeño hacia arriba a la derecha, en el caso de la nave de la izquierda, y hacia arriba a la izquierda en el caso de la de la derecha. Además, cada vez que el jugador efectúa un movimiento, se produce una desviación aleatoria de hasta el +5%.
+
 **** Combate
 La nave tiene un arma: el láser, que realiza un disparo desde proa, y no consume recursos.
 
 Un jugador deberá debilitar al oponente con tal de frenar su avance. De no preocuparse por ello, el otro jugador ganará por tiempo. En caso de ambos no combatir, gana la Ciudadela.
 
-La gran mayoría del combate se llevará a cabo *de forma indirecta*, mediante el envío de amenazas, esquivables o no, al otro jugador.
+El combate se realiza por medio de /habilidades/. Tienen cooldown definido que depende de cada una, así como un coste de recursos. Se comienza con una, que estabiliza la nave a un estado de casi reposo en comparación con la pantalla, pero consume 10 de oxígeno en su uso, y tiene un cooldown de 5 segundos.
+
+Cada cierto tiempo, aleatorizado, aparece un asteroide rojo en las pantallas de ambos jugadores. Destruirlo y capturar su drop implica desbloquear la siguiente habilidad secuencial. De no capturar el drop, la habilidad no será perdida, pero el jugador se verá obligado a esperar al siguiente asteroide de este tipo para conseguirla, lo que da una ventaja temporal al otro jugador que posiblemente conlleve su victoria.
+
+Las habilidades disponibles son:
+
+| Número | Nombre      | $H_2$ | $O_2$ | Cooldown | Descripción                                                        |
+|--------+-------------+-------+-------+----------+--------------------------------------------------------------------|
+|      1 | Estabilizar |     0 |    10 |        5 | Lleva la nave a un estado muy próximo al reposo relativo           |
+|      2 | Descalibrar |    20 |     5 |       20 | Aumenta la desviación del oponente en un 5000% durante 10 segundos |
+
 **** Avance
 Con tal del avanzar, los jugadores deberán:
 
-- Esquivar los ataques del otro jugador.
-- Intentar defenderse, mediante escudos o similares, de aquellos ataques que no sean esquivables.
+- Intentar defenderse mediante el uso de habilidades.
 - Esquivar o destruir los asteroides del entorno.
 - Repostar los recursos necesarios para mantener la nave en marcha.
 *** Flujo de la partida
@@ -70,6 +80,21 @@ Todo ser vivo, y esto incluye los seres de Andrómeda, necesita oxígeno para ma
 Se busca una duración de partida de 5 minutos desde el inicio hasta el agujero negro. Por efectos gravitatorios, cuanto más cerca se esté, más rápido decrecerá la distancia (en pársecs). Se puede fijar la distancia a recorrer en 1000 pársecs. Se busca, así, la aceleración.
 
 Se trata de un movimiento rectilíneo uniformemente acelerado, y su ecuación es: $e=\frac{1}{2} a t^2 + v_0 t + e_0$. En $t=0$, la distancia es máxima ($e = e_0 = 1000$). Se parte desde el reposo, $v_0=0$. Con todo esto, $0 = \frac{1}{2} a \cdot 5^2 + 1000 \iff -1000 = 12.5 a \iff a = -80 \; pc/m^2 = -0.02222 \; pc/s^2$.
+*** Controles
+Los controles están pensados para ser jugados por cada jugador con su mano derecha, ambos sobre el teclado.
+
+Para el jugador de la izquierda, los controles son:
+- ~W~: propulsión proa.
+- ~A~: propulsión babor.
+- ~S~: propulsión popa (retropopulsión).
+- ~D~: propulsión estribor.
+- ~Q~: disparo láser.
+- ~E~: efectuar habilidad seleccionada.
+- ~Z~: seleccionar la habilidad anterior en la lista.
+- ~X~: seleccionar la habilidad siguiente en la lista.
+
+Para el de la derecha, son análogos, pero con ~IJKL~ en lugar de ~WASD~. Entonces, ~QEZX~ serían ~UOM,~.
+
 ** Interfaz y gráficos
 *** Menús
 Badteroids tiene tres pantallas de menú: la principal, la de ajustes, y la de pausa.
@@ -102,7 +127,7 @@ En la parte superior central de la pantalla, se encuentra un medidor de distanci
 *** Asteroides
 Los asteroides son grafos completos (K_n) de distintos tamaños, velocidades, y número de vértices, que aparecen girando desde la parte superior de la pantalla. Los más pequeños giran más rápido. Con cada disparo, el número de vértices decrece hasta ser un triángulo. Disparar un triángulo implica destruirlo.
 
-Los asteroides normales son verdes. Los que contienen hidrógeno, blancos. Los que tienen oxígeno, azules.
+Los asteroides normales son verdes. Los que contienen hidrógeno, blancos. Los que tienen oxígeno, azules. Y los de habilidad, rojos.
 *** El fondo
 En la partida, en todo momento hay un fondo estelado, cargado de una textura generada aleatoriamente en el momento. Se genera proceduramente, lo que no limita la resolución a la que se debe jugar.
 
@@ -125,9 +150,19 @@ La velocidad de movimiento es un multiplicador condicionado al tamaño del aster
 Su coordenada X es generada aleatoriamente.
 
 El tipo es elegido aleatoriamente. Puede ser normal (70%), de hidrógeno (20%), o de oxígeno (10%).
+
+Los asteroides de habilidad no son generados de la misma manera que el resto. Supongamos que el número de habilidades totales es $n$. Se comienza con una, con lo que se han de generar, durante la partida $n-1$ asteroides de este tipo. Se divide el tiempo de la partida (5 minutos, 300 segundos) en franjas de $\frac{300}{n}$ segundos. La última se deja vacía, porque dar una habilidad tan próxima al final no tiene sentido. Dentro de las otras franjas, se emite un asteroide rojo en cualquier punto de ellas, de forma análoga a lo explicado anteriormente.
+
+Con tal de ser más fácil de acertar, el asteroide rojo es de un tamaño fijo mayor al resto, y siempre aparece en la mitad de la pantalla.
 ** Mercado
 Badteroids está bajo la licencia de /izquierdos de autor/ GNU General Public License v3, y su distribución se llevará a cabo en este mismo repositorio de GitHub de forma gratuita, sin modo oficial de pagar por él.
 ** Historial de cambios
+*** Versión 0.10
+- En "Gampelay y mecánicas -> Núcleo del gameplay -> Combate", se explican las habilidades.
+- En "Generación de mundo -> Asteroides", se ha añadido el de habilidad.
+- En "Gameplay y mecánicas", se ha añadido "Controles"
+- En "Gameplay y mecánicas -> Núcleo del gameplay -> Movimiento", ahora la desviación es del +5% en lugar de más-menos, para hacer posible la habilidad "Descalibrar".
+- En "Conceptos -> Background", especificado que el OOD se usa en la mayoría de casos 👀
 *** Versión 0.9
 - En "Gameplay y mecánicas", se ha comenzado "Fases de la carrera", que estaba pendiente hasta ahora.
 - En "Interfaz y gráficos -> HUD", mención al contador de distancia.

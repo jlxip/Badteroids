@@ -47,6 +47,8 @@ void Asteroid::setVertices(size_t n_) {
 		color = VBOs::Color::WHITE; break;
 	case Type::OXYGEN:
 		color = VBOs::Color::LIGHTBLUE; break;
+	case Type::SKILL:
+		color = VBOs::Color::RED; break;
 	}
 
 	this->VBO_c = VBOs::requestColor(color, n);

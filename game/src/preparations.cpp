@@ -4,6 +4,7 @@
 #include <Badteroids/Ship/models/all.hpp>
 #include <Config/Config.hpp>
 #include <Badteroids/RNG/RNG.hpp>
+#include <Badteroids/Ship/skills/skills.hpp>
 #include <ctime>
 
 extern Badteroids* game;
@@ -17,6 +18,7 @@ void preparations() {
 	Text::Fonts::upload();
 	ShipModels::Dummy::upload();
 	Background::BGDraw::upload();
+	Skills::upload();
 
 	// Game initialization
 	glClearColor(0.0, 0.0, 0.0, 1.0);

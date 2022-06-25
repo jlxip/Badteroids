@@ -4,8 +4,17 @@
 
 Drop::Drop(float x, float y, float dy, size_t type) {
 	this->VBO_v = BasicModels::Square::VBO_v;
+	this->type = type;
 
-	size_t color = type == Type::HYDROGEN ? VBOs::Color::WHITE : VBOs::Color::LIGHTBLUE;
+	size_t color = VBOs::Color::WHITE;
+	switch(type) {
+	case Type::OXYGEN:
+		color = VBOs::Color::LIGHTBLUE;
+		break;
+	case Type::SKILL:
+		color = VBOs::Color::RED;
+		break;
+	}
 	this->VBO_c = VBOs::requestColor(color, 4);
 
 	this->VBO_i = BasicModels::Square::VBO_i;
@@ -28,10 +37,17 @@ bool Drop::collisioned(Drawable* other) {
 		return false;
 
 	Ship& ship = model->getParent();
-	if(type == Type::HYDROGEN)
+	switch(type) {
+	case Type::HYDROGEN:
 		ship.addH();
-	else
+		break;
+	case Type::OXYGEN:
 		ship.addO();
+		break;
+	case Type::SKILL:
+		ship.addSkill();
+		break;
+	}
 
 	return true;
 }

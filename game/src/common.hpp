@@ -17,6 +17,7 @@
 #define ARY 9
 
 typedef double Time; // Just to avoid "float" mistakes
+extern Time now;
 
 template<typename Base, typename T>
 inline bool instanceof(const T* ptr) {
@@ -31,5 +32,9 @@ inline std::string f2s(float x) {
 	out << std::fixed << x;
 	return out.str();
 }
+
+// Some constants regarding the game, which have to be here
+constexpr Time GAME_DURATION = 5 * 60;
+constexpr size_t N_SKILLS = 2;
 
 #endif

@@ -24,6 +24,8 @@ protected:
 	float y = 0.0;
 	float r = 0.0;
 
+	float lineWidth = 1;
+
 	struct Inertia {
 		// Velocities, units per second
 		float vx = 0.0;
@@ -53,11 +55,18 @@ public:
 	Drawable& operator=(Drawable&&) = default;
 
 	inline void resetxy() { x = y = r = 0; }
+	inline float getScalex() { return scalex; }
+	inline float getScaley() { return scaley; }
 	inline float getx() const { return x; }
 	inline float gety() const { return y; }
 
+	inline void setScalex(float a) { scalex = a; }
+	inline void setScaley(float a) { scaley = a; }
 	inline void mulScalex(float a) { scalex *= a; }
 	inline void mulScaley(float a) { scaley *= a; }
+
+	inline void setx(float a) { x = a; }
+	inline void sety(float a) { y = a; }
 	inline void addx(float a) { x += a; }
 	inline void addy(float a) { y += a; }
 	inline void addr(float a) { r += a; }

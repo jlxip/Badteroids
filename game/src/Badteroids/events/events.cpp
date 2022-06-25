@@ -19,6 +19,7 @@ void lsDown() {
 		game->getLeftShip().moveDown();
 }
 
+
 void rsLeft() {
 	if(game->rightAlive() && !game->isPaused())
 		game->getRightShip().moveLeft();
@@ -36,14 +37,46 @@ void rsDown() {
 		game->getRightShip().moveDown();
 }
 
+
+
+
 void lsShoot() {
 	if(game->leftAlive() && !game->isPaused())
 		game->getLeftShip().shoot();
 }
+void lsSkillFire() {
+	if(game->leftAlive() && !game->isPaused())
+		game->getLeftShip().skillFire();
+}
+void lsSkillLeft() {
+	if(game->leftAlive() && !game->isPaused())
+		game->getLeftShip().skillLeft();
+}
+void lsSkillRight() {
+	if(game->leftAlive() && !game->isPaused())
+		game->getLeftShip().skillRight();
+}
+
+
 void rsShoot() {
 	if(game->rightAlive() && !game->isPaused())
 		game->getRightShip().shoot();
 }
+void rsSkillFire() {
+	if(game->rightAlive() && !game->isPaused())
+		game->getRightShip().skillFire();
+}
+void rsSkillLeft() {
+	if(game->rightAlive() && !game->isPaused())
+		game->getRightShip().skillLeft();
+}
+void rsSkillRight() {
+	if(game->rightAlive() && !game->isPaused())
+		game->getRightShip().skillRight();
+}
+
+
+
 
 void _menuUp() { if(game->isInMenu()) game->getMenu().move(0); }
 void _menuDown() { if(game->isInMenu()) game->getMenu().move(1); }

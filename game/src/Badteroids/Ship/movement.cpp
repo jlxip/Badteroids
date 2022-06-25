@@ -6,12 +6,16 @@ void Ship::_move(float dx, float dy) {
 	size_t rngarea = (iam == LEFT_SHIP)
 		? RNG::Area::LEFT_SHIP_DEVIATION
 		: RNG::Area::RIGHT_SHIP_DEVIATION;
-	float deviation = RNG::genf(rngarea, -maxDeviation, maxDeviation);
+	float deviation = RNG::genf(rngarea, 0, maxDeviation);
 
-	if(dx)
+	if(dx > 0)
 		dx += deviation;
-	else
+	else if(dx < 0)
+		dx -= deviation;
+	else if(dy > 0)
 		dy += deviation;
+	else
+		dy -= deviation;
 
 	// Are ther resources?
 	float usedH = HYDROGEN_BURN * std::abs(dx + dy);

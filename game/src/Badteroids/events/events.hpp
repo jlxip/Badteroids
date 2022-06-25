@@ -21,9 +21,15 @@ void rsDown();
 // --- ACTIONS ---
 // Left ship
 void lsShoot();
+void lsSkillFire();
+void lsSkillLeft();
+void lsSkillRight();
 
 // Right ship
 void rsShoot();
+void rsSkillFire();
+void rsSkillLeft();
+void rsSkillRight();
 
 // --- META ---
 void _menuUp();

@@ -11,18 +11,19 @@ Badteroids* game = nullptr;
 Config globalConfig;
 
 // For physics
-Time lastTick = 0;
+Time now;
+static Time lastTick = 0;
 
 // FPS measure
-size_t framesMeasured = 0;
-Time frameAcumTime = 0;
-float fps = 0;
+static size_t framesMeasured = 0;
+static Time frameAcumTime = 0;
+static float fps = 0;
 
 void Loop::mainLoop() {
 	// First, take the time
-	Time t = glfwGetTime();
-	Time dt = t - lastTick;
-	lastTick = t;
+	now = glfwGetTime();
+	Time dt = now - lastTick;
+	lastTick = now;
 
 	// Reset everything
 	glClear(GL_COLOR_BUFFER_BIT);
@@ -45,7 +46,7 @@ void Loop::mainLoop() {
 
 	// Tick more stuff
 	if(game->isPlaying() && !game->isPaused())
-		game->tick(t, dt);
+		game->tick(dt);
 
 	// Regular drawables
 	for(auto& x : Objects::drawables)

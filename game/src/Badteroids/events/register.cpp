@@ -18,8 +18,15 @@ void Badteroids::registerEvents() {
 	// Shoot with index finger, the most comfortable finger
 	//   for the most common action. Both use their right hand.
 	Keyboard::setKeyPress('Q', lsShoot);
-
 	Keyboard::setKeyPress('U', rsShoot);
+	// Skills
+	Keyboard::setKeyPress('E', lsSkillFire);
+	Keyboard::setKeyPress('Z', lsSkillLeft);
+	Keyboard::setKeyPress('X', lsSkillRight);
+
+	Keyboard::setKeyPress('O', rsSkillFire);
+	Keyboard::setKeyPress('M', rsSkillLeft);
+	Keyboard::setKeyPress(GLFW_KEY_COMMA, rsSkillRight);
 
 	// --- META ---
 	Keyboard::setKeyPress(GLFW_KEY_UP, _menuUp);

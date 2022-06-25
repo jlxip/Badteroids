@@ -1,6 +1,8 @@
 #include "Ship.hpp"
 #include <loop/objects.hpp>
 #include "models/all.hpp"
+#include "skills/skills.hpp"
+#include "ShipTimedEvent.hpp"
 
 Ship::Ship(bool iam_) {
 	this->iam = iam_;
@@ -47,5 +49,42 @@ void Ship::reset() {
 	model.getInertia().vx = startvx;
 	model.getInertia().vy = startvy;
 
+	maxDeviation = velocityPerPress * 0.05;
+
+	// Resources
 	resources.h = resources.o = 100;
+
+	// Skills
+	for(auto x : skills)
+		delete x;
+	skills.clear();
+	skills.push_back(dynamic_cast<Skills::Skill*>(new Skills::Stabilize));
+	skills.push_back(dynamic_cast<Skills::Skill*>(new Skills::Destabilize));
+
+	for(auto x : skills)
+		x->setiam(iam);
+}
+
+void Ship::tick() {
+	// Check if any TimedEvent deadlines have passed
+	auto it = TimedEvents::events.begin();
+	while(it != TimedEvents::events.end()) {
+		TimedEvents::TimedEvent* e = *it;
+		if(e->deadline > now)
+			break; // That's it, because it's sorted
+
+		if(e->isShip) {
+			// I've got this
+			auto* se = (TimedEvents::ShipRelated*)e;
+
+			if(se->mulDeviation)
+				maxDeviation /= se->mulDeviation;
+
+			delete se;
+			it = TimedEvents::events.erase(it);
+		} else {
+			// Not my cup of tea
+			++it;
+		}
+	}
 }
