@@ -29,6 +29,10 @@ private:
 	bool showFPS = false;
 	bool paused = false;
 
+	Time inGameTime = 0; // Seconds
+	static constexpr float ACCELERATION = -0.022222222;
+	static constexpr float MAX_DISTANCE = 1000;
+
 public:
 	Badteroids();
 	void init(); // Extra initialization after *game is set
@@ -38,7 +42,10 @@ public:
 	void leave();
 	void exit();
 
-	inline void tick(Time t) {
+	inline void tick(Time t, Time dt) {
+		if(playing && !paused)
+			inGameTime += dt;
+
 		leftAst.tick(t);
 		rightAst.tick(t);
 	}
@@ -70,6 +77,8 @@ public:
 			inMenu = false;
 		}
 	}
+
+	void drawHUD();
 };
 
 #endif

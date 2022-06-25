@@ -39,8 +39,8 @@ void Badteroids::leave() {
 	paused = playing = false;
 	menu.changeState(Menu::State::MAIN);
 
+	Objects::drawables.clear();
 	Objects::idrawables.clear();
-
 	for(auto x : Objects::cidrawablesp)
 		delete x;
 	Objects::cidrawablesp.clear();

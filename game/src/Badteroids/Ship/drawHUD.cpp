@@ -1,15 +1,7 @@
 #include "Ship.hpp"
 #include <basics/Text/Text.hpp>
-#include <sstream>
 
-static std::string f2s(float x) {
-	std::ostringstream out;
-	out.precision(2);
-	out << std::fixed << x;
-	return out.str();
-}
-
-void Ship::drawResources() {
+void Ship::drawHUD() {
 	const float y = 0.8;
 	float x;
 	if(iam == LEFT_SHIP)

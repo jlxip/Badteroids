@@ -66,7 +66,10 @@ El hidrógeno hace de combustible en Badteroids. Quedarse sin él implicaría ce
 **** Oxígeno
 Todo ser vivo, y esto incluye los seres de Andrómeda, necesita oxígeno para mantener una atmósfera en la cual sobrevivir. No siendo esto bastante, es además necesario en pequeñas cantidades como catalizador en las combustiones de hidrógeno. Quedarse sin oxígeno conllevaría la muerte inmediata del comandante.
 *** Fases de la carrera
-(Pendiente de definir)
+**** Longitud
+Se busca una duración de partida de 5 minutos desde el inicio hasta el agujero negro. Por efectos gravitatorios, cuanto más cerca se esté, más rápido decrecerá la distancia (en pársecs). Se puede fijar la distancia a recorrer en 1000 pársecs. Se busca, así, la aceleración.
+
+Se trata de un movimiento rectilíneo uniformemente acelerado, y su ecuación es: $e=\frac{1}{2} a t^2 + v_0 t + e_0$. En $t=0$, la distancia es máxima ($e = e_0 = 1000$). Se parte desde el reposo, $v_0=0$. Con todo esto, $0 = \frac{1}{2} a \cdot 5^2 + 1000 \iff -1000 = 12.5 a \iff a = -80 \; pc/m^2 = -0.02222 \; pc/s^2$.
 ** Interfaz y gráficos
 *** Menús
 Badteroids tiene tres pantallas de menú: la principal, la de ajustes, y la de pausa.
@@ -94,6 +97,8 @@ Durante una partida, existen ciertos metaelementos en primer plano que aportan i
 Bajo el contador de FPS está la información para el jugador izquierdo, y en su respectiva posición en la parte derecha de la pantalla está la del jugador derecho.
 
 La información muestra la cantidad de hidrógeno en forma de texto (sobre 100), y, bajo ella, la de oxígeno.
+
+En la parte superior central de la pantalla, se encuentra un medidor de distancia hasta el centro del agujero negro.
 *** Asteroides
 Los asteroides son grafos completos (K_n) de distintos tamaños, velocidades, y número de vértices, que aparecen girando desde la parte superior de la pantalla. Los más pequeños giran más rápido. Con cada disparo, el número de vértices decrece hasta ser un triángulo. Disparar un triángulo implica destruirlo.
 
@@ -123,6 +128,9 @@ El tipo es elegido aleatoriamente. Puede ser normal (70%), de hidrógeno (20%), 
 ** Mercado
 Badteroids está bajo la licencia de /izquierdos de autor/ GNU General Public License v3, y su distribución se llevará a cabo en este mismo repositorio de GitHub de forma gratuita, sin modo oficial de pagar por él.
 ** Historial de cambios
+*** Versión 0.9
+- En "Gameplay y mecánicas", se ha comenzado "Fases de la carrera", que estaba pendiente hasta ahora.
+- En "Interfaz y gráficos -> HUD", mención al contador de distancia.
 *** Versión 0.8
 - En "Gameplay y mecánicas -> Núcleo del gameplay -> Combate", ahora solo se menciona la existencia de un arma, el láser, que es la única factible de hacer en el tiempo dado.
 - En "Interfaz y gráficos", añadida sección "HUD".

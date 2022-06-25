@@ -46,4 +46,6 @@ void Ship::reset() {
 
 	model.getInertia().vx = startvx;
 	model.getInertia().vy = startvy;
+
+	resources.h = resources.o = 100;
 }

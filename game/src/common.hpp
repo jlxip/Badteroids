@@ -23,4 +23,13 @@ inline bool instanceof(const T* ptr) {
 	return dynamic_cast<const Base*>(ptr) != nullptr;
 }
 
+#include <sstream>
+
+inline std::string f2s(float x) {
+	std::ostringstream out;
+	out.precision(2);
+	out << std::fixed << x;
+	return out.str();
+}
+
 #endif

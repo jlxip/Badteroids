@@ -45,7 +45,7 @@ void Loop::mainLoop() {
 
 	// Tick more stuff
 	if(game->isPlaying() && !game->isPaused())
-		game->tick(t);
+		game->tick(t, dt);
 
 	// Regular drawables
 	for(auto& x : Objects::drawables)
@@ -60,11 +60,8 @@ void Loop::mainLoop() {
 
 
 	// --- HUD ---
-	// Resources
-	if(game->leftAlive())
-		game->getLeftShip().drawResources();
-	if(game->rightAlive())
-		game->getRightShip().drawResources();
+	if(game->isPlaying())
+		game->drawHUD();
 
 	// FPS
 	frameAcumTime += dt;

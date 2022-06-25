@@ -48,7 +48,7 @@ public:
 	}
 
 	inline Drawable& getModel() { return *Objects::cidrawablesp[obj]; }
-	void drawResources();
+	void drawHUD();
 
 	inline void addH() {
 		resources.h += H_PER_DROP;
